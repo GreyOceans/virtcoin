@@ -94,6 +94,23 @@
   </a>
   <div>
     <a href="/" style="color: var(--accent-light); text-decoration: none; font-weight: 500; font-size: 1.05rem; margin-left: 2rem;">Home</a>
+    <div>
+  <a href="/" style="color: var(--accent-light); text-decoration: none; font-weight: 500; font-size: 1.05rem; margin-left: 2rem;">Home</a>
+  <button id="wallet-connect-btn" style="
+    margin-left: 2rem;
+    padding: 0.5rem 1.3rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.45rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(88,166,255,0.05);
+  ">Connect Wallet</button>
+</div>
     <!-- Add more links here if needed -->
   </div>
 </nav>
@@ -127,6 +144,11 @@ async function fetchCryptoPrices() {
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);
 </script>
-
+<script>
+document.getElementById('wallet-connect-btn').onclick = function() {
+  alert('Wallet connection coming soon!');
+  // In the future, integrate MetaMask, WalletConnect, etc here.
+};
+</script>
 </body>
 </html>
