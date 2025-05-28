@@ -111,17 +111,39 @@
     .btn:hover {
       background-color: var(--accent-light);
     }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 12px;
-      margin-top: auto;
-      border-top: 1px solid #21262d;
-    }
     a {
       color: var(--accent);
       text-decoration: none;
     }
+    /* Footer styles for side-by-side layout */
+    footer {
+      width: 100%;
+      background: #161b22;
+      border-top: 1px solid #21262d;
+      color: #8b98a5;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.5rem 1rem;
+      margin-top: auto;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    footer > div {
+      display: flex;
+      align-items: center;
+    }
+    footer > div:nth-child(2) {
+      opacity: 0.85;
+      display: flex;
+    }
+    footer a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+    /* Responsive adjustments */
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
@@ -144,13 +166,8 @@
       h1 {
         font-size: 2rem !important;
       }
-      p, #crypto-prices, #crypto-news {
+      p, #crypto-prices {
         font-size: 1rem !important;
-      }
-      #crypto-news {
-        max-width: 100vw !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
       }
       .btn {
         max-width: 280px;
@@ -159,6 +176,15 @@
         margin: 0 auto;
         display: block;
         box-sizing: border-box;
+      }
+      footer {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+        padding: 1.5rem 0.3rem !important;
+        text-align: center !important;
+      }
+      footer > div {
+        justify-content: center !important;
       }
     }
     @media (max-width: 400px) {
@@ -170,17 +196,6 @@
         font-size: 1.3rem !important;
       }
     }
-    @media (max-width: 600px) {
-  footer {
-    flex-direction: column !important;
-    gap: 0.7rem !important;
-    padding: 1.5rem 0.3rem !important;
-    text-align: center !important;
-  }
-  footer > div {
-    justify-content: center !important;
-  }
-}
   </style>
 </head>
 <body>
@@ -201,41 +216,27 @@
     <a href="#waitlist" class="btn">ICO 2026</a>
     <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
   </header>
- <footer style="
-  width: 100%;
-  background: #161b22;
-  border-top: 1px solid #21262d;
-  color: #8b98a5;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1.5rem 1rem;
-  margin-top: auto;
-  font-size: 14px;
-  flex-wrap: wrap;
-">
-  <div style="display: flex; align-items: center; gap: 0.7rem;">
-    <img src="images/logo.png" alt="Virtcoin logo" style="width: 32px; height: 32px; border-radius: 50%;">
-    <span style="font-family: 'Montserrat',sans-serif; font-weight: 600; color: var(--accent); letter-spacing: 1px;">
-      virtcoin
-    </span>
-  </div>
-  <div style="opacity: 0.85;">
-    &copy; 2025 virtcoin. All rights reserved.
-  </div>
-  <div style="display: flex; gap: 1.5rem; align-items: center;">
-    <a href="mailto:ethan@virtcoin.com" style="color: var(--accent-light); text-decoration: none;">Contact</a>
-    <!-- Socials go here -->
-    <!--
-    <a href="https://twitter.com/" target="_blank" aria-label="Twitter" style="color: var(--accent-light); text-decoration: none;">
-      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M..."/></svg>
-      Twitter
-    </a>
-    -->
-  </div>
-</footer>
+  <footer>
+    <div style="gap: 0.7rem;">
+      <img src="images/logo.png" alt="Virtcoin logo" style="width: 32px; height: 32px; border-radius: 50%;">
+      <span style="font-family: 'Montserrat',sans-serif; font-weight: 600; color: var(--accent); letter-spacing: 1px;">
+        virtcoin
+      </span>
+    </div>
+    <div>
+      &copy; 2025 virtcoin. All rights reserved.
+    </div>
+    <div style="gap: 1.5rem;">
+      <a href="mailto:ethan@virtcoin.com">Contact</a>
+      <!-- Socials go here -->
+      <!--
+      <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M..."/></svg>
+        Twitter
+      </a>
+      -->
+    </div>
+  </footer>
   <script>
     async function fetchCryptoPrices() {
       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
