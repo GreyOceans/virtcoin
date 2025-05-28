@@ -109,17 +109,17 @@ async function fetchCryptoPrices() {
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);
 </script>
-  <script>
+<script>
 async function fetchCryptoNews() {
-  const url = 'https://cryptopanic.com/api/v1/posts/?auth_token=demo&currencies=BTC,ETH&public=true';
+  const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.feedburner.com/CoinDesk';
   try {
     const response = await fetch(url);
     const data = await response.json();
-    const articles = data.results.slice(0, 6); // Show 6 latest headlines
+    const articles = data.items.slice(0, 6); // Show 6 latest headlines
     let newsHtml = '';
     for (const article of articles) {
       newsHtml += `<li style="margin-bottom:0.6rem;">
-        <a href="${article.url}" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">
+        <a href="${article.link}" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">
           ${article.title.replace(/["']/g, '')}
         </a>
       </li>`;
@@ -130,7 +130,7 @@ async function fetchCryptoNews() {
   }
 }
 
-// Initial load and auto-refresh every 4 minutes
+// Initial load and refresh every 4 minutes
 fetchCryptoNews();
 setInterval(fetchCryptoNews, 240000);
 </script>
