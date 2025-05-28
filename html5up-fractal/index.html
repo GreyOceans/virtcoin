@@ -81,9 +81,29 @@
   <h1>virtcoin</h1>
   <p>The next generation decentralized crypto exchange is almost here.</p>
   <a href="#waitlist" class="btn">ICO 2026</a>
+  <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
 </header>
   <footer>
   <p>&copy; 2025 virtcoin. All rights reserved. | <a href="mailto:ethan@virtcoin.com">ethan@virtcoin.com</a></p>
 </footer>
+  <script>
+async function fetchCryptoPrices() {
+  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const btc = data.bitcoin.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
+    const eth = data.ethereum.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
+    document.getElementById('crypto-prices').innerHTML =
+      `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
+  } catch (e) {
+    document.getElementById('crypto-prices').innerHTML = "Could not load prices.";
+  }
+}
+
+// Initial load and refresh every 60 seconds
+fetchCryptoPrices();
+setInterval(fetchCryptoPrices, 60000);
+</script>
 </body>
 </html>
