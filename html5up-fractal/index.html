@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>virtcoin | Coming Soon</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -14,7 +15,11 @@
       --accent: #58a6ff;
       --accent-light: #79c0ff;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -22,124 +27,192 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      position: relative;
-      z-index: 1;
-    }
-    #svg-bg-wave {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 38vh;
-      z-index: 0; pointer-events: none; overflow: hidden;
     }
     nav {
-      width: 100%; background: #161b22; border-bottom: 1px solid #21262d;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.5rem 2rem; position: sticky; top: 0; z-index: 10;
+      width: 100%;
+      background: #161b22;
+      border-bottom: 1px solid #21262d;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    nav a, nav button { font-size: 1.05rem; }
+    nav a, nav button {
+      font-size: 1.05rem;
+    }
     nav a {
-      color: var(--accent-light); text-decoration: none; font-weight: 500; margin-left: 2rem;
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 2rem;
     }
-    nav a:first-child { margin-left: 0; }
+    nav a:first-child {
+      margin-left: 0;
+    }
     nav button {
-      margin-left: 2rem; padding: 0.5rem 1.3rem; background: var(--accent); color: #fff;
-      font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; border: none;
-      border-radius: 0.45rem; cursor: pointer;
-      transition: background-color 0.3s, transform 0.14s cubic-bezier(.4,1.4,.6,1), box-shadow 0.23s;
+      margin-left: 2rem;
+      padding: 0.5rem 1.3rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s;
       box-shadow: 0 2px 8px 0 rgba(88,166,255,0.05);
     }
-    nav button:disabled { background: #333; cursor: default; }
-    header {
-      flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; padding: 0 1rem; position: relative; z-index: 2;
+    nav button:disabled {
+      background: #333;
+      cursor: default;
     }
-    header img, nav img { max-width: 100%; height: auto; }
+    header {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    header img,
+    nav img {
+      max-width: 100%;
+      height: auto;
+    }
     h1 {
-      font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 700; color: var(--accent);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
     }
     .trust-badge {
-      background: rgba(88,166,255,0.12); color: var(--accent); font-size: 0.95rem;
-      padding: 2px 10px; border-radius: 12px; letter-spacing: 0.03em;
-      display: inline-block; margin-top: 0.5rem; margin-bottom: 1rem;
+      background: rgba(88,166,255,0.12);
+      color: var(--accent);
+      font-size: 0.95rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.03em;
+      display: inline-block;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
     }
-    .tagline {
-      margin-top: 0.8rem; font-size: 1.18rem; color: var(--accent);
-      font-family: 'Montserrat', sans-serif; font-weight: 600; margin-bottom: 1.1rem;
+    p {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+      max-width: 600px;
     }
-    .hero-list {
-      list-style: disc; margin: 1.2rem auto 1.3rem auto; padding-left: 1.4em;
-      max-width: 420px; color: #9db4ce; text-align: left; font-size: 1.08rem; line-height: 1.6;
-      background: none;
-    }
-    .hero-counters {
-      display: flex; gap: 2.3rem; justify-content: center; margin: 1.3rem 0 0.1rem 0; z-index: 2; position: relative;
-    }
-    .hero-counters > div { font-size: 1.18rem; font-family: 'Montserrat',sans-serif; font-weight: 600; }
-    .hero-counters .users { color: var(--accent); }
-    .hero-counters .traded { color: var(--accent-light); }
     .btn {
-      padding: 0.75rem 2rem; background-color: var(--accent); color: #fff;
-      font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 500;
-      text-decoration: none; border-radius: 0.5rem; display: inline-block; margin-top: 1.2rem;
-      transition: background-color 0.3s, transform 0.14s cubic-bezier(.4,1.4,.6,1), box-shadow 0.23s;
-      box-shadow: 0 2px 8px 0 rgba(88,166,255,0.05);
+      padding: 0.75rem 2rem;
+      background-color: var(--accent);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-top: 1.2rem;
     }
     .btn:hover {
-      background-color: var(--accent-light); transform: translateY(-2px) scale(1.035);
-      box-shadow: 0 8px 28px 0 rgba(88,166,255,0.12);
+      background-color: var(--accent-light);
     }
-    a { color: var(--accent); text-decoration: none; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    /* Footer styles for side-by-side layout */
     footer {
-      width: 100%; background: #161b22; border-top: 1px solid #21262d; color: #8b98a5;
-      display: flex; flex-direction: row; align-items: center; justify-content: center;
-      gap: 2rem; padding: 1.5rem 1rem; margin-top: auto; font-size: 14px; flex-wrap: wrap;
+      width: 100%;
+      background: #161b22;
+      border-top: 1px solid #21262d;
+      color: #8b98a5;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.5rem 1rem;
+      margin-top: auto;
+      font-size: 14px;
+      flex-wrap: wrap;
     }
-    footer > div { display: flex; align-items: center; }
-    footer > div:nth-child(2) { opacity: 0.85; display: flex; }
+    footer > div {
+      display: flex;
+      align-items: center;
+    }
+    footer > div:nth-child(2) {
+      opacity: 0.85;
+      display: flex;
+    }
     footer a {
-      color: var(--accent-light); text-decoration: none; display: flex; align-items: center; gap: 0.35rem;
+      color: var(--accent-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
+    /* Responsive adjustments */
     @media (max-width: 600px) {
-      nav { flex-direction: column; align-items: flex-start !important; padding: 0.5rem 1rem !important; }
-      nav a, nav button { font-size: 0.98rem !important; margin-left: 0.7rem !important; margin-top: 0.5rem; margin-bottom: 0.5rem; }
-      nav > a { margin-bottom: 0.5rem; }
-      header img { width: 70px !important; margin-bottom: 0.7rem !important; }
-      h1 { font-size: 2rem !important; }
-      .tagline { font-size: 1rem !important; }
-      .hero-list { font-size: 1rem !important; padding-left: 1.1em !important; }
-      .btn { max-width: 280px; width: auto; font-size: 1rem !important; margin: 0 auto; display: block; box-sizing: border-box; }
-      .hero-counters { flex-direction: column !important; gap: 0.8rem !important; }
-      footer { flex-direction: column !important; gap: 0.7rem !important; padding: 1.5rem 0.3rem !important; text-align: center !important; }
-      footer > div { justify-content: center !important; }
-      #backToTop { right: 1rem !important; bottom: 1.1rem !important; }
+      nav {
+        flex-direction: column;
+        align-items: flex-start !important;
+        padding: 0.5rem 1rem !important;
+      }
+      nav a, nav button {
+        font-size: 0.98rem !important;
+        margin-left: 0.7rem !important;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      nav > a {
+        margin-bottom: 0.5rem;
+      }
+      header img {
+        width: 70px !important;
+        margin-bottom: 0.7rem !important;
+      }
+      h1 {
+        font-size: 2rem !important;
+      }
+      p, #crypto-prices {
+        font-size: 1rem !important;
+      }
+      .btn {
+        max-width: 280px;
+        width: auto;
+        font-size: 1rem !important;
+        margin: 0 auto;
+        display: block;
+        box-sizing: border-box;
+      }
+      footer {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+        padding: 1.5rem 0.3rem !important;
+        text-align: center !important;
+      }
+      footer > div {
+        justify-content: center !important;
+      }
     }
     @media (max-width: 400px) {
-      nav, header, footer { padding-left: 0.2rem !important; padding-right: 0.2rem !important; }
-      h1 { font-size: 1.3rem !important; }
+      nav, header, footer {
+        padding-left: 0.2rem !important;
+        padding-right: 0.2rem !important;
+      }
+      h1 {
+        font-size: 1.3rem !important;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Animated SVG Background Wave -->
-  <div id="svg-bg-wave">
-    <svg viewBox="0 0 1440 400" width="100%" height="100%" style="display: block;">
-      <defs>
-        <linearGradient id="waveGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#79c0ff" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.10"/>
-        </linearGradient>
-      </defs>
-      <path id="wavePath"
-        d="M0,320 Q360,220 720,320 T1440,320 V400 H0Z"
-        fill="url(#waveGrad)">
-        <animate attributeName="d" dur="7s" repeatCount="indefinite"
-          values="
-            M0,320 Q360,220 720,320 T1440,320 V400 H0Z;
-            M0,320 Q360,300 720,180 T1440,320 V400 H0Z;
-            M0,320 Q360,220 720,320 T1440,320 V400 H0Z
-          "
-        />
-      </path>
-    </svg>
-  </div>
   <nav>
     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
       <img src="images/logo.png" alt="Virtcoin Logo" style="width: 40px; height: 40px; margin-right: 0.7rem;">
@@ -153,18 +226,10 @@
   <header>
     <img src="images/logo.png" alt="Virtcoin Logo" style="width: 100px; margin-bottom: 1rem;">
     <h1>virtcoin</h1>
-    <div class="trust-badge">Built for the future</div>
-    <div class="tagline">Trade. Earn. Own your future.</div>
-    <ul class="hero-list">
-      <li>No KYC – privacy first</li>
-      <li>Ultra-low fees</li>
-      <li>Cross-chain swaps in seconds</li>
-      <li>Your keys, your coins, always</li>
-    </ul>
-    <div class="hero-counters">
-      <div class="users"><span id="usersCount">0</span>+ Users Waiting</div>
-      <div class="traded">$<span id="tradedCount">0</span> Traded</div>
+    <div class="trust-badge">
+      Built for the future
     </div>
+    <p>The next generation decentralized crypto exchange is almost here.</p>
     <a href="#waitlist" class="btn">ICO 2026</a>
     <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
   </header>
@@ -175,7 +240,9 @@
         virtcoin
       </span>
     </div>
-    <div>&copy; 2025 virtcoin. All rights reserved.</div>
+    <div>
+      &copy; 2025 virtcoin. All rights reserved.
+    </div>
     <div style="gap: 1.5rem;">
       <a href="mailto:ethan@virtcoin.com">Contact</a>
       <a href="#" aria-label="Twitter">
@@ -186,55 +253,9 @@
         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 6px;"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.0371c-1.6304.2733-3.2122.7874-4.8852 1.5152a.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1046c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2912a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.198.3728.2922a.077.077 0 0 1-.0066.1276c-.598.3438-1.2205.6457-1.8733.8933a.0766.0766 0 0 0-.0407.1036c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.673-3.5485-13.6601a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1835 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1842 1.0952 2.1568 2.4189 0 1.3333-.9554 2.419-2.1569 2.419Zm7.9748 0c-1.1834 0-2.1568-1.0857-2.1568-2.419 0-1.3332.9554-2.4189 2.1568-2.4189 1.2108 0 2.1842 1.0952 2.1568 2.4189 0 1.3333-.946 2.419-2.1568 2.419Z"/></svg>
         Discord
       </a>
-      <a href="/privacy.html" style="font-size: 13px;">Privacy Policy</a>
     </div>
   </footer>
-  <button id="backToTop" aria-label="Back to top
-  <!-- Back to Top Button -->
-  <button id="backToTop" aria-label="Back to top"
-    style="
-      position: fixed;
-      right: 2rem;
-      bottom: 2rem;
-      background: var(--accent-light);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      box-shadow: 0 4px 16px 0 rgba(88,166,255,0.16);
-      cursor: pointer;
-      z-index: 30;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    ">
-    <svg width="26" height="26" fill="none" viewBox="0 0 24 24">
-      <path d="M12 19V5M12 5L6 11M12 5l6 6"
-            stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-
   <script>
-    // Animated Counters
-    function animateCounter(id, end, duration, prefix = '', suffix = '') {
-      const el = document.getElementById(id);
-      let start = 0;
-      const stepTime = Math.max(Math.floor(duration / end), 20);
-      let current = start;
-      const step = () => {
-        current += Math.ceil(end / (duration / stepTime));
-        if (current > end) current = end;
-        el.textContent = prefix + current.toLocaleString() + suffix;
-        if (current < end) setTimeout(step, stepTime);
-      };
-      step();
-    }
-    animateCounter('usersCount', 1421, 1500);
-    animateCounter('tradedCount', 238721, 1800);
-
-    // Crypto Price Fetcher
     async function fetchCryptoPrices() {
       const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
       try {
@@ -248,15 +269,16 @@
         document.getElementById('crypto-prices').innerHTML = "Could not load prices.";
       }
     }
+    // Initial load and refresh every 60 seconds
     fetchCryptoPrices();
     setInterval(fetchCryptoPrices, 60000);
 
-    // Wallet Connect
     async function connectWallet() {
       if (window.ethereum) {
         try {
           const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
           const address = accounts[0];
+          // Show shortened address in button
           const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
           document.getElementById('wallet-connect-btn').textContent = shortAddr;
           document.getElementById('wallet-connect-btn').disabled = true;
@@ -268,20 +290,8 @@
         alert('MetaMask or another Ethereum wallet is not installed.');
       }
     }
-    document.getElementById('wallet-connect-btn').onclick = connectWallet;
 
-    // Back to Top Button Logic
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 200) {
-        backToTopBtn.style.display = 'flex';
-      } else {
-        backToTopBtn.style.display = 'none';
-      }
-    });
-    backToTopBtn.onclick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    document.getElementById('wallet-connect-btn').onclick = connectWallet;
   </script>
 </body>
 </html>
