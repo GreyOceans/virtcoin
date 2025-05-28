@@ -82,6 +82,10 @@
   <p>The next generation decentralized crypto exchange is almost here.</p>
   <a href="#waitlist" class="btn">ICO 2026</a>
   <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
+  <div id="crypto-news" style="margin-top:2.5rem; text-align:left; max-width:600px;">
+  <h2 style="font-size:1.2rem; color:var(--accent); margin-bottom:0.5rem;">Latest Crypto News</h2>
+  <ul id="news-list" style="list-style:none; padding-left:0; font-size:1rem;"></ul>
+</div>
 </header>
   <footer>
   <p>&copy; 2025 virtcoin. All rights reserved. | <a href="mailto:ethan@virtcoin.com">ethan@virtcoin.com</a></p>
@@ -104,6 +108,31 @@ async function fetchCryptoPrices() {
 // Initial load and refresh every 60 seconds
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);
+</script>
+  <script>
+async function fetchCryptoNews() {
+  const url = 'https://cryptopanic.com/api/v1/posts/?auth_token=demo&currencies=BTC,ETH&public=true';
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const articles = data.results.slice(0, 6); // Show 6 latest headlines
+    let newsHtml = '';
+    for (const article of articles) {
+      newsHtml += `<li style="margin-bottom:0.6rem;">
+        <a href="${article.url}" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">
+          ${article.title.replace(/["']/g, '')}
+        </a>
+      </li>`;
+    }
+    document.getElementById('news-list').innerHTML = newsHtml;
+  } catch (e) {
+    document.getElementById('news-list').innerHTML = '<li>Could not load news headlines right now.</li>';
+  }
+}
+
+// Initial load and auto-refresh every 4 minutes
+fetchCryptoNews();
+setInterval(fetchCryptoNews, 240000);
 </script>
 </body>
 </html>
