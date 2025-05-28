@@ -190,8 +190,43 @@
     <a href="#waitlist" class="btn">ICO 2026</a>
     <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
   </header>
-  <footer>
-    <p>&copy; 2025 virtcoin. All rights reserved. | <a href="mailto:ethan@virtcoin.com">ethan@virtcoin.com</a></p>
+ <footer style="
+  width: 100%;
+  background: #161b22;
+  border-top: 1px solid #21262d;
+  color: #8b98a5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 2rem 1rem 1rem 1rem;
+  margin-top: auto;
+  font-size: 14px;
+">
+  <div style="display: flex; align-items: center; gap: 0.7rem;">
+    <img src="images/logo.png" alt="Virtcoin logo" style="width: 32px; height: 32px; border-radius: 50%;">
+    <span style="font-family: 'Montserrat',sans-serif; font-weight: 600; color: var(--accent); letter-spacing: 1px;">
+      virtcoin
+    </span>
+  </div>
+  <div style="opacity: 0.85;">
+    &copy; 2025 virtcoin. All rights reserved.
+  </div>
+  <div style="display: flex; gap: 1.5rem; align-items: center;">
+    <a href="mailto:ethan@virtcoin.com" style="color: var(--accent-light); text-decoration: none;">Contact</a>
+    <!-- Uncomment or add your socials below if you want -->
+    <!--
+    <a href="https://twitter.com/" target="_blank" style="color: var(--accent-light); text-decoration: none;">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M..."/></svg>
+      Twitter
+    </a>
+    <a href="https://discord.com/" target="_blank" style="color: var(--accent-light); text-decoration: none;">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M..."/></svg>
+      Discord
+    </a>
+    -->
+  </div>
   </footer>
   <script>
     async function fetchCryptoPrices() {
