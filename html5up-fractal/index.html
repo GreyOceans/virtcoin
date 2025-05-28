@@ -142,10 +142,25 @@ fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);
 </script>
 <script>
-document.getElementById('wallet-connect-btn').onclick = function() {
-  alert('Wallet connection coming soon!');
-  // In the future, integrate MetaMask, WalletConnect, etc here.
-};
+async function connectWallet() {
+  if (window.ethereum) {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const address = accounts[0];
+      // Show shortened address in button
+      const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
+      document.getElementById('wallet-connect-btn').textContent = shortAddr;
+      document.getElementById('wallet-connect-btn').disabled = true;
+      document.getElementById('wallet-connect-btn').style.background = '#333';
+    } catch (error) {
+      alert('Wallet connection was rejected.');
+    }
+  } else {
+    alert('MetaMask or another Ethereum wallet is not installed.');
+  }
+}
+
+document.getElementById('wallet-connect-btn').onclick = connectWallet;
 </script>
 </body>
 </html>
