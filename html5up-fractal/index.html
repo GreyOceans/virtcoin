@@ -82,9 +82,6 @@
   <p>The next generation decentralized crypto exchange is almost here.</p>
   <a href="#waitlist" class="btn">ICO 2026</a>
   <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
-  <div id="crypto-news" style="margin-top:2.5rem; text-align:left; max-width:600px;">
-  <h2 style="font-size:1.2rem; color:var(--accent); margin-bottom:0.5rem;">Latest Crypto News</h2>
-  <ul id="news-list" style="list-style:none; padding-left:0; font-size:1rem;"></ul>
 </div>
 </header>
   <footer>
@@ -109,30 +106,6 @@ async function fetchCryptoPrices() {
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);
 </script>
-<script>
-async function fetchCryptoNews() {
-  const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.feedburner.com/CoinDesk';
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const articles = data.items.slice(0, 6); // Show 6 latest headlines
-    let newsHtml = '';
-    for (const article of articles) {
-      newsHtml += `<li style="margin-bottom:0.6rem;">
-        <a href="${article.link}" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">
-          ${article.title.replace(/["']/g, '')}
-        </a>
-      </li>`;
-    }
-    document.getElementById('news-list').innerHTML = newsHtml;
-  } catch (e) {
-    document.getElementById('news-list').innerHTML = '<li>Could not load news headlines right now.</li>';
-  }
-}
 
-// Initial load and refresh every 4 minutes
-fetchCryptoNews();
-setInterval(fetchCryptoNews, 240000);
-</script>
 </body>
 </html>
