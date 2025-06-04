@@ -232,11 +232,15 @@
     <img src="images/logo.png" alt="Virtcoin Logo" style="width: 100px; margin-bottom: 1rem;">
     <h1>virtcoin</h1>
     <div class="trust-badge">
-  Unstoppable Decentralized AI Models
-</div>
-<p style="font-size:1.05rem; color:#b4c1d3; line-height:1.7; margin: 1.2rem 0;">
-  Virtcoin is a decentralized blockchain where you earn VIRT by staking and keeping AI models running. Help secure the network, power on-chain AI, and earn VIRT—anyone can participate.
-</p>
+      100% Decentralized Blockchain
+    </div>
+    <p>
+      Introducing Virtcoin, the decentralized blockchain designed for the AI era. Our network deploys advanced artificial intelligence directly on-chain, powered by proof of stake.
+      <br><br>
+      Validators secure the network and earn rewards for supporting AI-powered applications and services. Every block helps train and deliver smarter, faster, and more reliable AI for real-world use.
+      <br><br>
+      <strong>Anyone can participate.</strong> Stake, validate, or build with Virtcoin and shape the future of AI on the blockchain.
+    </p>
     <a href="#waitlist" class="btn">Join the Waitlist</a>
     <div id="crypto-prices" style="margin-top:2rem; font-size:1.1rem;"></div>
   </header>
@@ -267,49 +271,43 @@
       <a href="/privacy.html" style="font-size: 13px;">Privacy Policy</a>
     </div>
   </footer>
- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const walletBtn = document.getElementById('wallet-connect-btn');
-    const priceDisplay = document.getElementById('crypto-prices');
-
+  <script>
     async function fetchCryptoPrices() {
+      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
       try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
-        const data = await res.json();
-        const btc = data.bitcoin.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        const eth = data.ethereum.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        priceDisplay.innerHTML = `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
-      } catch (err) {
-        priceDisplay.textContent = 'Could not load prices.';
-        console.error('Price fetch error:', err);
+        const response = await fetch(url);
+        const data = await response.json();
+        const btc = data.bitcoin.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
+        const eth = data.ethereum.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
+        document.getElementById('crypto-prices').innerHTML =
+          `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
+      } catch (e) {
+        document.getElementById('crypto-prices').innerHTML = "Could not load prices.";
       }
     }
-
-    async function connectWallet() {
-      if (!window.ethereum) {
-        alert('MetaMask or another Ethereum wallet is not installed.');
-        return;
-      }
-
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const address = accounts[0];
-        const shortAddr = `${address.slice(0, 6)}...${address.slice(-4)}`;
-        walletBtn.textContent = shortAddr;
-        walletBtn.disabled = true;
-        walletBtn.style.background = '#333';
-        console.log("Connected wallet:", address);
-      } catch (err) {
-        alert('Wallet connection was rejected.');
-        console.error('Connection error:', err);
-      }
-    }
-
-    walletBtn.addEventListener('click', connectWallet);
+    // Initial load and refresh every 60 seconds
     fetchCryptoPrices();
     setInterval(fetchCryptoPrices, 60000);
-  });
-</script>
 
+    async function connectWallet() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const address = accounts[0];
+          // Show shortened address in button
+          const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
+          document.getElementById('wallet-connect-btn').textContent = shortAddr;
+          document.getElementById('wallet-connect-btn').disabled = true;
+          document.getElementById('wallet-connect-btn').style.background = '#333';
+        } catch (error) {
+          alert('Wallet connection was rejected.');
+        }
+      } else {
+        alert('MetaMask or another Ethereum wallet is not installed.');
+      }
+    }
+
+    document.getElementById('wallet-connect-btn').onclick = connectWallet;
+  </script>
 </body>
 </html>
