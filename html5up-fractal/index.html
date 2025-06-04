@@ -53,9 +53,6 @@
       font-weight: 500;
       margin-left: 2rem;
     }
-    nav a:first-child {
-      margin-left: 0;
-    }
     nav button {
       margin-left: 2rem;
       padding: 0.5rem 1.3rem;
@@ -99,7 +96,6 @@
       font-size: 0.95rem;
       padding: 2px 10px;
       border-radius: 12px;
-      display: inline-block;
       margin: 0.5rem 0 1rem;
     }
     p {
@@ -119,15 +115,10 @@
       text-decoration: none;
       border-radius: 0.5rem;
       transition: background-color 0.3s ease;
-      display: inline-block;
       margin-top: 1.2rem;
     }
     .btn:hover {
       background-color: var(--accent-light);
-    }
-    a {
-      color: var(--accent);
-      text-decoration: none;
     }
     footer {
       width: 100%;
@@ -153,65 +144,49 @@
     footer > div:nth-child(3) {
       gap: 1.5rem;
     }
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        align-items: flex-start !important;
-        padding: 0.5rem 1rem !important;
+        align-items: flex-start;
+        padding: 0.5rem 1rem;
       }
       nav a, nav button {
-        font-size: 0.98rem !important;
-        margin-left: 0.7rem !important;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-      nav > a {
-        margin-bottom: 0.5rem;
+        font-size: 0.98rem;
+        margin-left: 0.7rem;
+        margin: 0.5rem 0.7rem;
       }
       .hero-logo {
-        width: 70px !important;
-        margin-bottom: 0.7rem !important;
+        width: 70px;
+        margin-bottom: 0.7rem;
       }
       h1 {
-        font-size: 2rem !important;
+        font-size: 2rem;
       }
       p, #crypto-prices {
-        font-size: 1rem !important;
+        font-size: 1rem;
       }
       .btn {
         max-width: 280px;
         width: auto;
-        font-size: 1rem !important;
-        margin: 0 auto;
         display: block;
+        margin: 0 auto;
       }
       footer {
-        flex-direction: column !important;
-        gap: 0.7rem !important;
-        padding: 1.5rem 0.3rem !important;
-        text-align: center !important;
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1.5rem 0.3rem;
+        text-align: center;
       }
       footer > div {
-        flex-direction: column !important;
-        gap: 0.4rem !important;
-        justify-content: center !important;
-      }
-      footer > div:nth-child(3) {
-        gap: 1rem !important;
+        flex-direction: column;
+        gap: 0.4rem;
       }
     }
   </style>
 </head>
 <body>
   <nav role="navigation">
-    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+    <a href="/" style="display: flex; align-items: center;">
       <img src="images/logo.png" alt="Virtcoin Logo" style="width: 40px; height: 40px; margin-right: 0.7rem;">
       <span style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; color: var(--accent); font-weight: 700;">virtcoin</span>
     </a>
@@ -245,43 +220,64 @@
       <a href="/privacy.html" style="font-size: 13px;">Privacy Policy</a>
     </div>
   </footer>
-  <script>
-    const priceDiv = document.getElementById('crypto-prices');
-    const walletBtn = document.getElementById('wallet-connect-btn');
+<script>
+  const priceDiv = document.getElementById('crypto-prices');
+  const walletBtn = document.getElementById('wallet-connect-btn');
 
-    async function fetchCryptoPrices() {
-      try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
-        const data = await res.json();
-        const btc = data.bitcoin.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        const eth = data.ethereum.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        priceDiv.innerHTML = `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
-      } catch {
-        priceDiv.textContent = "Could not load prices.";
-      }
+  async function fetchCryptoPrices() {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
+      const data = await res.json();
+      const btc = data.bitcoin.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      const eth = data.ethereum.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      priceDiv.innerHTML = `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
+    } catch {
+      priceDiv.textContent = "Could not load prices.";
+    }
+  }
+
+  async function connectWallet() {
+    if (walletBtn.disabled) return;
+    if (!window.ethereum) {
+      alert('Please install MetaMask to connect your wallet.');
+      return;
     }
 
-    async function connectWallet() {
-      if (walletBtn.disabled) return;
-      if (window.ethereum) {
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const address = accounts[0];
-          const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
-          walletBtn.textContent = shortAddr;
-          walletBtn.disabled = true;
-          walletBtn.style.background = '#333';
-        } catch {
-          alert('Wallet connection was rejected.');
-        }
-      } else {
-        alert('MetaMask or another Ethereum wallet is not installed.');
-      }
-    }
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const address = accounts[0];
+      const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
+      walletBtn.textContent = shortAddr;
+      walletBtn.disabled = true;
+      walletBtn.style.background = '#333';
+      localStorage.setItem('virtcoin_wallet', address);
 
-    walletBtn.onclick = connectWallet;
-    fetchCryptoPrices();
-    setInterval(fetchCryptoPrices, 60000);
-  </script>
+      const message = 'Log in to Virtcoin';
+      const signature = await ethereum.request({
+        method: 'personal_sign',
+        params: [message, address],
+      });
+
+      console.log('Signature:', signature); // You can verify this on your server
+    } catch (err) {
+      alert('Wallet connection failed: ' + err.message);
+    }
+  }
+
+  function restoreWallet() {
+    const savedAddr = localStorage.getItem('virtcoin_wallet');
+    if (savedAddr) {
+      const shortAddr = savedAddr.slice(0, 6) + '...' + savedAddr.slice(-4);
+      walletBtn.textContent = shortAddr;
+      walletBtn.disabled = true;
+      walletBtn.style.background = '#333';
+    }
+  }
+
+  walletBtn.onclick = connectWallet;
+  fetchCryptoPrices();
+  setInterval(fetchCryptoPrices, 60000);
+  restoreWallet();
+</script>
 </body>
 </html>
