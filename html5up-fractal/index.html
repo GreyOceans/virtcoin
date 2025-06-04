@@ -267,43 +267,49 @@
       <a href="/privacy.html" style="font-size: 13px;">Privacy Policy</a>
     </div>
   </footer>
-  <script>
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const walletBtn = document.getElementById('wallet-connect-btn');
+    const priceDisplay = document.getElementById('crypto-prices');
+
     async function fetchCryptoPrices() {
-      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
       try {
-        const response = await fetch(url);
-        const data = await response.json();
-        const btc = data.bitcoin.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
-        const eth = data.ethereum.usd.toLocaleString('en-US', {style:'currency',currency:'USD'});
-        document.getElementById('crypto-prices').innerHTML =
-          `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
-      } catch (e) {
-        document.getElementById('crypto-prices').innerHTML = "Could not load prices.";
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
+        const data = await res.json();
+        const btc = data.bitcoin.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        const eth = data.ethereum.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        priceDisplay.innerHTML = `Bitcoin: <strong>${btc}</strong> &nbsp; | &nbsp; Ethereum: <strong>${eth}</strong>`;
+      } catch (err) {
+        priceDisplay.textContent = 'Could not load prices.';
+        console.error('Price fetch error:', err);
       }
     }
-    // Initial load and refresh every 60 seconds
-    fetchCryptoPrices();
-    setInterval(fetchCryptoPrices, 60000);
 
     async function connectWallet() {
-      if (window.ethereum) {
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const address = accounts[0];
-          // Show shortened address in button
-          const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
-          document.getElementById('wallet-connect-btn').textContent = shortAddr;
-          document.getElementById('wallet-connect-btn').disabled = true;
-          document.getElementById('wallet-connect-btn').style.background = '#333';
-        } catch (error) {
-          alert('Wallet connection was rejected.');
-        }
-      } else {
+      if (!window.ethereum) {
         alert('MetaMask or another Ethereum wallet is not installed.');
+        return;
+      }
+
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const address = accounts[0];
+        const shortAddr = `${address.slice(0, 6)}...${address.slice(-4)}`;
+        walletBtn.textContent = shortAddr;
+        walletBtn.disabled = true;
+        walletBtn.style.background = '#333';
+        console.log("Connected wallet:", address);
+      } catch (err) {
+        alert('Wallet connection was rejected.');
+        console.error('Connection error:', err);
       }
     }
 
-    document.getElementById('wallet-connect-btn').onclick = connectWallet;
-  </script>
+    walletBtn.addEventListener('click', connectWallet);
+    fetchCryptoPrices();
+    setInterval(fetchCryptoPrices, 60000);
+  });
+</script>
+
 </body>
 </html>
