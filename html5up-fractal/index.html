@@ -332,66 +332,68 @@
       <a href="/privacy.html" class="privacy-link">Privacy Policy</a>
     </div>
   </footer>
- <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const walletConnectBtn = document.getElementById('wallet-connect-btn');
     if (walletConnectBtn) {
-        walletConnectBtn.onclick = connectWallet;
+      walletConnectBtn.addEventListener('click', connectWallet);
     }
-    fetchCryptoPrices(); // Initial fetch
+
+    fetchCryptoPrices();
     setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
   });
 
   async function connectWallet() {
     const btn = document.getElementById('wallet-connect-btn');
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const address = accounts[0];
-        const shortAddr = address.slice(0, 6) + '...' + address.slice(-4);
-        btn.textContent = shortAddr;
-        btn.disabled = true;
-        // btn.style.background = '#333'; // This is now handled by CSS :disabled pseudo-class
-        // btn.style.color = '#777'; // This is now handled by CSS :disabled pseudo-class
-      } catch (error) {
-        console.error('Wallet connection error:', error);
-        alert('Wallet connection was rejected by the user or an error occurred.');
+    if (!window.ethereum) {
+      alert('MetaMask or another Web3 wallet is not installed. Please install one to continue.');
+      return;
+    }
+
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const address = accounts[0];
+      const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+      btn.textContent = shortAddress;
+      btn.disabled = true;
+    } catch (error) {
+      console.error('Wallet connection failed:', error);
+      if (error.code === 4001) {
+        alert('Connection request rejected.');
+      } else {
+        alert('An error occurred while connecting your wallet.');
       }
-    } else {
-      alert('MetaMask or another Ethereum-compatible wallet is not installed. Please install one to connect.');
     }
   }
 
   async function fetchCryptoPrices() {
     const cryptoPricesDiv = document.getElementById('crypto-prices');
-    if (!cryptoPricesDiv) return; // Guard clause if element doesn't exist
+    if (!cryptoPricesDiv) return;
 
     const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
     try {
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`CoinGecko API request failed with status ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`API error: ${response.status}`);
       const data = await response.json();
-      const btcPrice = data.bitcoin?.usd;
-      const ethPrice = data.ethereum?.usd;
 
-      let priceHtml = "Could not load all prices.";
-      if (btcPrice && ethPrice) {
-        const btc = btcPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        const eth = ethPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        priceHtml = `Bitcoin: <strong>${btc}</strong>   |   Ethereum: <strong>${eth}</strong>`;
-      } else if (btcPrice) {
-        const btc = btcPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        priceHtml = `Bitcoin: <strong>${btc}</strong>   |   Ethereum: N/A`;
-      } else if (ethPrice) {
-        const eth = ethPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-        priceHtml = `Bitcoin: N/A   |   Ethereum: <strong>${eth}</strong>`;
+      const btc = data.bitcoin?.usd;
+      const eth = data.ethereum?.usd;
+
+      const format = val => val.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+      if (btc && eth) {
+        cryptoPricesDiv.innerHTML = `Bitcoin: <strong>${format(btc)}</strong>   |   Ethereum: <strong>${format(eth)}</strong>`;
+      } else if (btc) {
+        cryptoPricesDiv.innerHTML = `Bitcoin: <strong>${format(btc)}</strong>   |   Ethereum: N/A`;
+      } else if (eth) {
+        cryptoPricesDiv.innerHTML = `Bitcoin: N/A   |   Ethereum: <strong>${format(eth)}</strong>`;
+      } else {
+        cryptoPricesDiv.textContent = 'Prices unavailable.';
       }
-      cryptoPricesDiv.innerHTML = priceHtml;
-    } catch (e) {
-      console.error("Failed to fetch crypto prices:", e);
-      cryptoPricesDiv.innerHTML = "Could not load crypto prices at this time.";
+
+    } catch (error) {
+      console.error('Error fetching prices:', error);
+      cryptoPricesDiv.textContent = 'Could not load crypto prices.';
     }
   }
 </script>
