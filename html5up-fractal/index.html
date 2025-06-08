@@ -10,118 +10,50 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
+  <!-- styles (unchanged) -->
   <style>
-    :root{
-      --bg1:#0d1117;
-      --bg2:#00091a;
-      --accent:#58a6ff;
-      --accent-light:#79c0ff;
-      --text:#c9d1d9;
-      --muted:#8b98a5;
-      --radius:0.8rem;
-    }
+    :root{--bg1:#0d1117;--bg2:#00091a;--accent:#58a6ff;--accent-light:#79c0ff;
+          --text:#c9d1d9;--muted:#8b98a5;--radius:0.8rem;}
     *{margin:0;padding:0;box-sizing:border-box;}
-
-    body{
-      font-family:"Roboto",sans-serif;
-      color:var(--text);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      background:linear-gradient(120deg,var(--bg1),var(--bg2));
-      overflow-x:hidden;
-    }
-
-    /* soft animated backdrop */
-    body::before{
-      content:"";
-      position:fixed;inset:0;
-      background:
-        radial-gradient(circle at 20% 30%,rgba(88,166,255,.15),transparent 50%),
-        radial-gradient(circle at 80% 70%,rgba(121,192,255,.1),transparent 55%);
-      animation:float 20s linear infinite;
-      z-index:-1;
-    }
+    body{font-family:"Roboto",sans-serif;color:var(--text);min-height:100vh;
+         display:flex;flex-direction:column;background:linear-gradient(120deg,var(--bg1),var(--bg2));overflow-x:hidden;}
+    body::before{content:"";position:fixed;inset:0;
+      background:radial-gradient(circle at 20% 30%,rgba(88,166,255,.15),transparent 50%),
+                 radial-gradient(circle at 80% 70%,rgba(121,192,255,.1),transparent 55%);
+      animation:float 20s linear infinite;z-index:-1;}
     @keyframes float{from{transform:translateY(0);}to{transform:translateY(-200px);}}
-
-    /* navigation */
-    nav{
-      width:100%;
-      padding:0.7rem 2rem;
-      position:sticky;top:0;
-      backdrop-filter:blur(8px);
-      background:rgba(13,17,23,.55);
-      border-bottom:1px solid rgba(255,255,255,.05);
-      display:flex;justify-content:space-between;align-items:center;
-      z-index:10;
-    }
+    nav{width:100%;padding:0.7rem 2rem;position:sticky;top:0;
+        backdrop-filter:blur(8px);background:rgba(13,17,23,.55);
+        border-bottom:1px solid rgba(255,255,255,.05);
+        display:flex;justify-content:space-between;align-items:center;z-index:10;}
     .nav-brand{display:flex;align-items:center;text-decoration:none;color:inherit;}
     .nav-brand img{width:42px;height:42px;margin-right:0.65rem;}
     .nav-brand span{font-family:"Montserrat",sans-serif;font-size:1.35rem;font-weight:700;color:var(--accent);}
-
     .nav-links{display:flex;align-items:center;gap:2rem;}
     .nav-links a{color:var(--accent-light);text-decoration:none;font-weight:500;font-size:1.05rem;}
-
-    .btn-small{
-      padding:0.45rem 1.3rem;font-family:"Montserrat",sans-serif;font-weight:600;
-      background:var(--accent);color:#000;
-      border:none;border-radius:var(--radius);
-      cursor:pointer;box-shadow:0 2px 8px rgba(88,166,255,.12);
-      transition:background .25s;
-    }
+    .btn-small{padding:0.45rem 1.3rem;font-family:"Montserrat",sans-serif;font-weight:600;
+               background:var(--accent);color:#000;border:none;border-radius:var(--radius);
+               cursor:pointer;box-shadow:0 2px 8px rgba(88,166,255,.12);transition:background .25s;}
     .btn-small:hover{background:var(--accent-light);}
-
-    /* hero */
-    header{
-      flex:1;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:center;
-      text-align:center;
-      padding:3.5rem 1rem 2.5rem;
-    }
+    header{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3.5rem 1rem 2.5rem;}
     header img{width:110px;height:auto;margin-bottom:1.2rem;}
-
-    h1{
-      font-family:"Montserrat",sans-serif;
-      font-size:3.4rem;line-height:1.15;
-      background:linear-gradient(90deg,var(--accent),var(--accent-light));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 8px rgba(88,166,255,.25);
-    }
-    .tagline{
-      margin-top:0.6rem;padding:4px 14px;
-      font-size:0.95rem;color:var(--accent);
-      background:rgba(88,166,255,.14);border-radius:9999px;
-    }
-    .lead{
-      max-width:620px;margin-top:1.4rem;
-      font-family:"Inter",sans-serif;
-      font-size:0.85rem;line-height:1.6;color:#b4c1d3;
-    }
-
-    .cta{
-      margin-top:2rem;padding:0.85rem 2.4rem;
-      font-family:"Montserrat",sans-serif;font-weight:600;font-size:1rem;
-      background:var(--accent);color:#000;border:none;border-radius:var(--radius);
-      cursor:pointer;box-shadow:0 4px 16px rgba(88,166,255,.2);
-      transition:background .25s,transform .25s;
-    }
+    h1{font-family:"Montserrat",sans-serif;font-size:3.4rem;line-height:1.15;
+       background:linear-gradient(90deg,var(--accent),var(--accent-light));
+       -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+       text-shadow:0 0 8px rgba(88,166,255,.25);}
+    .tagline{margin-top:0.6rem;padding:4px 14px;font-size:0.95rem;color:var(--accent);
+             background:rgba(88,166,255,.14);border-radius:9999px;}
+    .lead{max-width:620px;margin-top:1.4rem;font-family:"Inter",sans-serif;font-size:0.85rem;line-height:1.6;color:#b4c1d3;}
+    .cta{margin-top:2rem;padding:0.85rem 2.4rem;font-family:"Montserrat",sans-serif;font-weight:600;font-size:1rem;
+         background:var(--accent);color:#000;border:none;border-radius:var(--radius);
+         cursor:pointer;box-shadow:0 4px 16px rgba(88,166,255,.2);
+         transition:background .25s,transform .25s;}
     .cta:hover{background:var(--accent-light);transform:translateY(-2px);}
-
-    /* price bar */
-    #crypto-prices{
-      margin-top:2rem;font-size:1.05rem;
-      background:rgba(255,255,255,.05);
-      padding:0.6rem 1.4rem;border-radius:var(--radius);display:inline-block;
-    }
+    #crypto-prices{margin-top:2rem;font-size:1.05rem;background:rgba(255,255,255,.05);
+                   padding:0.6rem 1.4rem;border-radius:var(--radius);display:inline-block;}
     #crypto-prices strong{color:var(--accent-light);}
-
-    /* footer */
-    footer{
-      background:rgba(22,27,34,.7);backdrop-filter:blur(6px);
-      padding:2rem 1rem 2.4rem;
-      text-align:center;color:var(--muted);font-size:0.9rem;
-    }
+    footer{background:rgba(22,27,34,.7);backdrop-filter:blur(6px);
+           padding:2rem 1rem 2.4rem;text-align:center;color:var(--muted);font-size:0.9rem;}
     .footer-top{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:1.2rem;}
     .logo-bar{display:flex;align-items:center;gap:0.6rem;}
     .logo-bar img{width:34px;height:34px;border-radius:50%;}
@@ -129,13 +61,7 @@
     .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:0.95rem;}
     .footer-links a{color:var(--accent-light);text-decoration:none;}
     .copy{margin-top:0.8rem;}
-
-    /* small screens */
-    @media(max-width:640px){
-      h1{font-size:2.4rem;}
-      .lead{font-size:0.8rem;}
-      .nav-links a{font-size:0.95rem;}
-    }
+    @media(max-width:640px){h1{font-size:2.4rem;}.lead{font-size:0.8rem;}.nav-links a{font-size:0.95rem;}}
   </style>
 </head>
 <body>
@@ -161,7 +87,7 @@
       Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
     </p>
 
-    <a href="mailto:Ethan@virtoin.com?subject=Investor%20Inquiry"
+    <a href="mailto:ethan@virtcoin.com?subject=Investor%20Inquiry"
        class="cta"
        rel="noopener noreferrer">
        Become an Early Investor
@@ -177,13 +103,15 @@
         <img src="images/logo.png" alt="Virtcoin logo small">
         <span class="brand">virtcoin</span>
       </div>
+
       <div class="footer-links">
-        <a href="mailto:Ethan@virtoin.com">Contact</a>
+        <a href="mailto:ethan@virtcoin.com">Contact</a>
         <a href="YOUR_TWITTER_URL_HERE" target="_blank" rel="noopener noreferrer">Twitter</a>
         <a href="YOUR_DISCORD_INVITE_URL_HERE" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="/privacy.html">Privacy policy</a>
       </div>
     </div>
+
     <div class="copy">© 2025 virtcoin. All rights reserved.</div>
   </footer>
 
