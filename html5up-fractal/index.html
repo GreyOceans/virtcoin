@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500&family=Inter+Tight:wght@400&display=swap" rel="stylesheet">
 
   <style>
-    /* root palette – Horizon */
+    /* root palette: Horizon */
     :root{
       --bg1:#0c1411;
       --bg2:#0e2218;
@@ -203,7 +203,7 @@
   <!-- navigation -->
   <nav>
     <a class="nav-brand" href="/">
-      <img src="images/logo.png" alt="Virtcoin logo">
+      <img src="images/logo1.png" alt="Virtcoin logo">
       <span>virtcoin</span>
     </a>
 
@@ -215,7 +215,7 @@
 
   <!-- hero -->
   <header>
-    <img src="images/logo.png" alt="Virtcoin logo large">
+    <img src="images/logo1.png" alt="Virtcoin logo large">
     <h1>virtcoin</h1>
     <div class="tagline">Decentralized AI powered by you</div>
     <p class="lead">
@@ -234,7 +234,7 @@
   <footer>
     <div class="footer-top">
       <div class="logo-bar">
-        <img src="images/logo.png" alt="Virtcoin logo small">
+        <img src="images/logo1.png" alt="Virtcoin logo small">
         <span class="brand">virtcoin</span>
       </div>
       <div class="footer-links">
@@ -264,7 +264,7 @@
       }
       try{
         const[addr]=await window.ethereum.request({method:"eth_requestAccounts"});
-        btn.textContent=addr.slice(0,6)+"…"+addr.slice(-4);
+        btn.textContent=addr.slice(0,6)+"…" +addr.slice(-4);
         btn.disabled=true;
       }catch(err){
         console.error(err);
