@@ -249,39 +249,53 @@
 
   <!-- scripts -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("wallet-connect-btn");
-    if (btn) btn.addEventListener("click", connectWallet);
+    document.addEventListener("DOMContentLoaded",()=>{
+      const btn=document.getElementById("wallet-connect-btn");
+      if(btn)btn.addEventListener("click",connectWallet);
+      fetchPrices();
+      setInterval(fetchPrices,300000);
+    });
 
-    fetchPrices();
-    setInterval(fetchPrices, 300000); // five-minute refresh
-  });
-
-  async function connectWallet() {
-    const btn = document.getElementById("wallet-connect-btn");
-
-    if (typeof window.ethereum === "undefined") {
-      alert("MetaMask not found. Install the extension and reload.");
-      return;
+    async function connectWallet(){
+      const btn=document.getElementById("wallet-connect-btn");
+      if(!window.ethereum){
+        alert("Please install MetaMask or another Web3 wallet.");
+        return;
+      }
+      try{
+        const[addr]=await window.ethereum.request({method:"eth_requestAccounts"});
+        btn.textContent=addr.slice(0,6)+"…"+addr.slice(-4);
+        btn.disabled=true;
+      }catch(err){
+        console.error(err);
+        alert("Wallet connection failed.");
+      }
     }
 
-    try {
-      // MetaMask requires an empty params array for this method
-      const [addr] = await window.ethereum.request({
-        method: "eth_requestAccounts",
-        params: []
-      });
-
-      btn.textContent = addr.slice(0, 6) + "…" + addr.slice(-4);
-      btn.disabled = true;
-    } catch (err) {
-      // 4001 is user-rejected, everything else is a genuine error
-      if (err.code !== 4001) console.error("Wallet error:", err);
-      alert("Wallet connection was cancelled or failed.");
+    async function fetchPrices(){
+      const bar=document.getElementById("crypto-prices");
+      if(!bar)return;
+      try{
+        const url="https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD";
+        const res=await fetch(url);
+        if(!res.ok)throw new Error(res.status);
+        const data=await res.json();
+        const btc=data.BTC?.USD;
+        const eth=data.ETH?.USD;
+        if(btc&&eth){updateBar(btc,eth);}
+        else{throw new Error("Missing keys");}
+      }catch(err){
+        console.warn("Price fetch failed:",err.message);
+        bar.textContent="Could not load prices.";
+      }
     }
-  }
 
-  /* fetchPrices and updateBar stay unchanged */
-</script>
+    function updateBar(btc,eth){
+      const fmt=v=>v.toLocaleString("en-US",{style:"currency",currency:"USD"});
+      document.getElementById("crypto-prices").innerHTML=
+        "Bitcoin <strong>"+fmt(btc)+"</strong>   |   "+
+        "Ethereum <strong>"+fmt(eth)+"</strong>";
+    }
+  </script>
 </body>
 </html>
