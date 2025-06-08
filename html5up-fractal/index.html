@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>virtcoin | Coming Soon</title>
 
-  <!-- fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
@@ -18,7 +18,7 @@
       --accent-light:#79c0ff;
       --text:#c9d1d9;
       --muted:#8b98a5;
-      --radius:.8rem;
+      --radius:0.8rem;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
 
@@ -32,6 +32,7 @@
       overflow-x:hidden;
     }
 
+    /* soft animated backdrop */
     body::before{
       content:"";
       position:fixed;inset:0;
@@ -43,9 +44,10 @@
     }
     @keyframes float{from{transform:translateY(0);}to{transform:translateY(-200px);}}
 
+    /* navigation */
     nav{
       width:100%;
-      padding:.7rem 2rem;
+      padding:0.7rem 2rem;
       position:sticky;top:0;
       backdrop-filter:blur(8px);
       background:rgba(13,17,23,.55);
@@ -54,26 +56,31 @@
       z-index:10;
     }
     .nav-brand{display:flex;align-items:center;text-decoration:none;color:inherit;}
-    .nav-brand img{width:42px;height:42px;margin-right:.65rem;}
+    .nav-brand img{width:42px;height:42px;margin-right:0.65rem;}
     .nav-brand span{font-family:"Montserrat",sans-serif;font-size:1.35rem;font-weight:700;color:var(--accent);}
 
     .nav-links{display:flex;align-items:center;gap:2rem;}
     .nav-links a{color:var(--accent-light);text-decoration:none;font-weight:500;font-size:1.05rem;}
 
     .btn-small{
-      padding:.45rem 1.3rem;font-family:"Montserrat",sans-serif;font-weight:600;
+      padding:0.45rem 1.3rem;font-family:"Montserrat",sans-serif;font-weight:600;
       background:var(--accent);color:#000;
-      border:none;border-radius:var(--radius);cursor:pointer;
-      box-shadow:0 2px 8px rgba(88,166,255,.12);
+      border:none;border-radius:var(--radius);
+      cursor:pointer;box-shadow:0 2px 8px rgba(88,166,255,.12);
       transition:background .25s;
     }
     .btn-small:hover{background:var(--accent-light);}
 
+    /* hero */
     header{
-      flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+      flex:1;
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      text-align:center;
       padding:3.5rem 1rem 2.5rem;
     }
     header img{width:110px;height:auto;margin-bottom:1.2rem;}
+
     h1{
       font-family:"Montserrat",sans-serif;
       font-size:3.4rem;line-height:1.15;
@@ -82,19 +89,18 @@
       text-shadow:0 0 8px rgba(88,166,255,.25);
     }
     .tagline{
-      margin-top:.6rem;padding:4px 14px;
-      font-size:.95rem;color:var(--accent);
+      margin-top:0.6rem;padding:4px 14px;
+      font-size:0.95rem;color:var(--accent);
       background:rgba(88,166,255,.14);border-radius:9999px;
     }
-
     .lead{
       max-width:620px;margin-top:1.4rem;
       font-family:"Inter",sans-serif;
-      font-size:.85rem;line-height:1.6;color:#b4c1d3;
+      font-size:0.85rem;line-height:1.6;color:#b4c1d3;
     }
 
     .cta{
-      margin-top:2rem;padding:.85rem 2.4rem;
+      margin-top:2rem;padding:0.85rem 2.4rem;
       font-family:"Montserrat",sans-serif;font-weight:600;font-size:1rem;
       background:var(--accent);color:#000;border:none;border-radius:var(--radius);
       cursor:pointer;box-shadow:0 4px 16px rgba(88,166,255,.2);
@@ -102,29 +108,33 @@
     }
     .cta:hover{background:var(--accent-light);transform:translateY(-2px);}
 
+    /* price bar */
     #crypto-prices{
       margin-top:2rem;font-size:1.05rem;
       background:rgba(255,255,255,.05);
-      padding:.6rem 1.4rem;border-radius:var(--radius);display:inline-block;
+      padding:0.6rem 1.4rem;border-radius:var(--radius);display:inline-block;
     }
     #crypto-prices strong{color:var(--accent-light);}
 
+    /* footer */
     footer{
       background:rgba(22,27,34,.7);backdrop-filter:blur(6px);
-      padding:2rem 1rem 2.4rem;text-align:center;color:var(--muted);font-size:.9rem;
+      padding:2rem 1rem 2.4rem;
+      text-align:center;color:var(--muted);font-size:0.9rem;
     }
     .footer-top{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:1.2rem;}
-    .logo-bar{display:flex;align-items:center;gap:.6rem;}
+    .logo-bar{display:flex;align-items:center;gap:0.6rem;}
     .logo-bar img{width:34px;height:34px;border-radius:50%;}
     .logo-bar .brand{font-family:"Montserrat",sans-serif;font-weight:600;color:var(--accent);}
-    .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:.95rem;}
+    .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:0.95rem;}
     .footer-links a{color:var(--accent-light);text-decoration:none;}
-    .copy{margin-top:.8rem;}
+    .copy{margin-top:0.8rem;}
 
+    /* small screens */
     @media(max-width:640px){
       h1{font-size:2.4rem;}
-      .lead{font-size:.8rem;}
-      .nav-links a{font-size:.95rem;}
+      .lead{font-size:0.8rem;}
+      .nav-links a{font-size:0.95rem;}
     }
   </style>
 </head>
@@ -135,7 +145,6 @@
       <img src="images/logo.png" alt="Virtcoin logo">
       <span>virtcoin</span>
     </a>
-
     <div class="nav-links">
       <a href="/">Home</a>
       <button id="wallet-connect-btn" class="btn-small">Connect Wallet</button>
@@ -152,8 +161,10 @@
       Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
     </p>
 
-    <a href="YOUR_WAITLIST_FORM_URL_HERE" class="cta" target="_blank" rel="noopener noreferrer">
-      Become an Early Investor
+    <a href="mailto:Ethan@virtoin.com?subject=Investor%20Inquiry"
+       class="cta"
+       rel="noopener noreferrer">
+       Become an Early Investor
     </a>
 
     <div id="crypto-prices"></div>
@@ -166,71 +177,68 @@
         <img src="images/logo.png" alt="Virtcoin logo small">
         <span class="brand">virtcoin</span>
       </div>
-
       <div class="footer-links">
-        <a href="mailto:ethan@virtcoin.com">Contact</a>
+        <a href="mailto:Ethan@virtoin.com">Contact</a>
         <a href="YOUR_TWITTER_URL_HERE" target="_blank" rel="noopener noreferrer">Twitter</a>
         <a href="YOUR_DISCORD_INVITE_URL_HERE" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="/privacy.html">Privacy policy</a>
       </div>
     </div>
-
     <div class="copy">© 2025 virtcoin. All rights reserved.</div>
   </footer>
 
   <!-- scripts -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("wallet-connect-btn");
-    if (btn) btn.addEventListener("click", connectWallet);
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("wallet-connect-btn");
+      if (btn) btn.addEventListener("click", connectWallet);
+      fetchPrices();
+      setInterval(fetchPrices, 60000);
+    });
 
-    fetchPrices();               // first run
-    setInterval(fetchPrices, 60000); // update every minute
-  });
-
-  async function connectWallet() {
-    const btn = document.getElementById("wallet-connect-btn");
-    if (!window.ethereum) {
-      alert("Please install MetaMask or another Web3 wallet.");
-      return;
+    async function connectWallet() {
+      const btn = document.getElementById("wallet-connect-btn");
+      if (!window.ethereum) {
+        alert("Please install MetaMask or another Web3 wallet.");
+        return;
+      }
+      try {
+        const [addr] = await window.ethereum.request({ method: "eth_requestAccounts" });
+        btn.textContent = addr.slice(0, 6) + "…" + addr.slice(-4);
+        btn.disabled = true;
+      } catch (err) {
+        console.error(err);
+        alert("Wallet connection failed.");
+      }
     }
-    try {
-      const [addr] = await window.ethereum.request({ method: "eth_requestAccounts" });
-      btn.textContent = addr.slice(0, 6) + "…" + addr.slice(-4);
-      btn.disabled = true;
-    } catch (err) {
-      console.error(err);
-      alert("Wallet connection failed.");
+
+    async function fetchPrices() {
+      const bar = document.getElementById("crypto-prices");
+      if (!bar) return;
+
+      try {
+        /* Bitcoin price from Coindesk */
+        const btcRes = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
+        const btcData = await btcRes.json();
+        const btc = btcData.bpi?.USD?.rate_float;
+
+        /* Ethereum price from Binance */
+        const ethRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT");
+        const ethData = await ethRes.json();
+        const eth = parseFloat(ethData.price);
+
+        updateBar(btc, eth);
+      } catch (err) {
+        console.warn("Price fetch failed:", err.message);
+        bar.textContent = "Could not load prices.";
+      }
     }
-  }
 
-  async function fetchPrices() {
-    const bar = document.getElementById("crypto-prices");
-    if (!bar) return;
-
-    try {
-      /* Bitcoin price from Coindesk */
-      const btcRes = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
-      const btcData = await btcRes.json();
-      const btc = btcData.bpi?.USD?.rate_float;
-
-      /* Ethereum price from Binance */
-      const ethRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT");
-      const ethData = await ethRes.json();
-      const eth = parseFloat(ethData.price);
-
-      updateBar(btc, eth);
-    } catch (err) {
-      console.warn("Price fetch failed:", err.message);
-      bar.textContent = "Could not load prices.";
+    function updateBar(btc, eth) {
+      const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
+      document.getElementById("crypto-prices").innerHTML =
+        "Bitcoin <strong>" + fmt(btc) + "</strong>   |   Ethereum <strong>" + fmt(eth) + "</strong>";
     }
-  }
-
-  function updateBar(btc, eth) {
-    const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
-    document.getElementById("crypto-prices").innerHTML =
-      "Bitcoin <strong>" + fmt(btc) + "</strong>   |   Ethereum <strong>" + fmt(eth) + "</strong>";
-  }
-</script>
+  </script>
 </body>
 </html>
