@@ -2,400 +2,226 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="images/logo.png">
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>virtcoin | Coming Soon</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg: #0d1117;
-      --text: #c9d1d9;
-      --accent: #58a6ff; /* Consider #4185d0 for better contrast with white text */
-      --accent-light: #79c0ff;
-      --button-text-on-accent: #000000; /* For better contrast on accent background */
+    :root{
+      --bg1:#0d1117;
+      --bg2:#00091a;
+      --accent:#58a6ff;
+      --accent-light:#79c0ff;
+      --text:#c9d1d9;
+      --muted:#8b98a5;
+      --radius:.8rem;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    nav {
-      width: 100%;
-      background: #161b22;
-      border-bottom: 1px solid #21262d;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .nav-logo-img {
-      width: 40px;
-      height: 40px;
-      margin-right: 0.7rem;
-    }
-    .nav-logo-text {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    nav a, nav button { /* General nav links/buttons */
-      font-size: 1.05rem;
-    }
-    nav .nav-links a { /* Specific to links like "Home" */
-      color: var(--accent-light);
-      text-decoration: none;
-      font-weight: 500;
-      margin-left: 2rem;
-    }
-    nav .nav-links a:first-child {
-      margin-left: 0;
-    }
-    nav button { /* Wallet connect button */
-      margin-left: 2rem;
-      padding: 0.5rem 1.3rem;
-      background: var(--accent);
-      color: var(--button-text-on-accent);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 0.45rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 8px 0 rgba(88,166,255,0.05);
-    }
-    nav button:hover:not(:disabled) {
-        background: var(--accent-light);
-    }
-    nav button:disabled {
-      background: #333; /* Keep dark text for disabled too, or change to light gray */
-      color: #777;
-      cursor: default;
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:"Roboto",sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      background:linear-gradient(120deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
     }
 
-    main { /* Changed from header */
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem 1rem; /* Added some top/bottom padding */
+    body::before{
+      content:"";
+      position:fixed;inset:0;
+      background:
+        radial-gradient(circle at 20% 30%,rgba(88,166,255,.15),transparent 50%),
+        radial-gradient(circle at 80% 70%,rgba(121,192,255,.1),transparent 55%);
+      animation:float 20s linear infinite;
+      z-index:-1;
     }
-    .main-logo-img { /* Changed from header img */
-      width: 100px;
-      margin-bottom: 1rem;
-      max-width: 100%;
-      height: auto;
+    @keyframes float{from{transform:translateY(0);}to{transform:translateY(-200px);}}
+
+    nav{
+      width:100%;
+      padding:.7rem 2rem;
+      position:sticky;top:0;
+      backdrop-filter:blur(8px);
+      background:rgba(13,17,23,.55);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;justify-content:space-between;align-items:center;
+      z-index:10;
     }
-    nav img { /* For any other nav images if added, though .nav-logo-img is specific */
-      max-width: 100%;
-      height: auto;
+    .nav-brand{display:flex;align-items:center;text-decoration:none;color:inherit;}
+    .nav-brand img{width:42px;height:42px;margin-right:.65rem;}
+    .nav-brand span{font-family:"Montserrat",sans-serif;font-size:1.35rem;font-weight:700;color:var(--accent);}
+
+    .nav-links{display:flex;align-items:center;gap:2rem;}
+    .nav-links a{color:var(--accent-light);text-decoration:none;font-weight:500;font-size:1.05rem;}
+
+    .btn-small{
+      padding:.45rem 1.3rem;font-family:"Montserrat",sans-serif;font-weight:600;
+      background:var(--accent);color:#000;
+      border:none;border-radius:var(--radius);cursor:pointer;
+      box-shadow:0 2px 8px rgba(88,166,255,.12);
+      transition:background .25s;
+    }
+    .btn-small:hover{background:var(--accent-light);}
+
+    header{
+      flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+      padding:3.5rem 1rem 2.5rem;
+    }
+    header img{width:110px;height:auto;margin-bottom:1.2rem;}
+    h1{
+      font-family:"Montserrat",sans-serif;
+      font-size:3.4rem;line-height:1.15;
+      background:linear-gradient(90deg,var(--accent),var(--accent-light));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-shadow:0 0 8px rgba(88,166,255,.25);
+    }
+    .tagline{
+      margin-top:.6rem;padding:4px 14px;
+      font-size:.95rem;color:var(--accent);
+      background:rgba(88,166,255,.14);border-radius:9999px;
     }
 
-    h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .trust-badge {
-      background: rgba(88,166,255,0.12);
-      color: var(--accent);
-      font-size: 0.95rem;
-      padding: 2px 10px;
-      border-radius: 12px;
-      letter-spacing: 0.03em;
-      display: inline-block;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    main p { /* Scoped p to main */
-      font-size: 1.25rem;
-      margin: 1rem 0;
-      max-width: 600px;
-      color:#b4c1d3; /* Moved from inline */
-      line-height:1.7;  /* Moved from inline */
-    }
-    .main-description { /* Specific class for the longer paragraph if needed */
-       font-size:1.05rem; /* from inline */
+    /* lead paragraph now ~30 percent smaller */
+    .lead{
+      max-width:620px;margin-top:1.4rem;
+      font-family:"Inter",sans-serif;
+      font-size:.85rem;              /* reduced from 1.22rem */
+      line-height:1.6;
+      color:#b4c1d3;
     }
 
-    .btn {
-      padding: 0.75rem 2rem;
-      background-color: var(--accent);
-      color: var(--button-text-on-accent);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 0.5rem;
-      transition: background-color 0.3s, color 0.3s;
-      display: inline-block;
-      margin-top: 1.2rem;
+    .cta{
+      margin-top:2rem;padding:.85rem 2.4rem;
+      font-family:"Montserrat",sans-serif;font-weight:600;font-size:1rem;
+      background:var(--accent);color:#000;border:none;border-radius:var(--radius);
+      cursor:pointer;box-shadow:0 4px 16px rgba(88,166,255,.2);
+      transition:background .25s,transform .25s;
     }
-    .btn:hover {
-      background-color: var(--accent-light);
-    }
-    a { /* General link style, be careful not to override too much */
-      color: var(--accent);
-      text-decoration: none;
-    }
-    /* ===== FIXED FOOTER STYLES BELOW ===== */
-    footer {
-      width: 100%;
-      background: #161b22;
-      border-top: 1px solid #21262d;
-      color: #8b98a5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem 1rem;
-      margin-top: auto;
-      font-size: 14px;
-      text-align: center;
-      gap: 0.7rem;
-    }
-    footer .footer-logo-img { /* Class for footer logo */
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-    }
-    footer .footer-brand-text { /* Class for footer brand text */
-        font-family: 'Montserrat',sans-serif;
-        font-weight: 600;
-        color: var(--accent);
-        letter-spacing: 1px;
-    }
-    footer > div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-    }
-    footer > div:nth-child(3) {
-      gap: 1.5rem;
-    }
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    footer a.privacy-link { /* Specific class for privacy link if needed for styling */
-        font-size: 13px;
-    }
+    .cta:hover{background:var(--accent-light);transform:translateY(-2px);}
 
-    /* Crypto Prices styling */
-    #crypto-prices {
-        margin-top: 2rem;
-        font-size: 1.1rem;
+    #crypto-prices{
+      margin-top:2rem;font-size:1.05rem;
+      background:rgba(255,255,255,.05);
+      padding:.6rem 1.4rem;border-radius:var(--radius);display:inline-block;
     }
-    #crypto-prices strong {
-        color: var(--accent-light);
-    }
+    #crypto-prices strong{color:var(--accent-light);}
 
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start; /* Removed !important, should work if base is not more specific */
-        padding: 0.5rem 1rem; /* Removed !important */
-      }
-      nav .nav-links a, nav button { /* Targeting specific elements */
-        font-size: 0.98rem; /* Removed !important */
-        margin-left: 0; /* Reset margin for stacked items */
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-      nav .nav-brand { /* To ensure logo is also affected by stacking context if needed */
-        margin-bottom: 0.5rem;
-      }
-      .main-logo-img { /* Was header img */
-        width: 70px; /* Removed !important, class specificity should handle it */
-        margin-bottom: 0.7rem; /* Removed !important */
-      }
-      h1 {
-        font-size: 2rem; /* Removed !important */
-      }
-      main p, #crypto-prices {
-        font-size: 1rem; /* Removed !important */
-      }
-      .btn {
-        max-width: 280px;
-        width: 100%; /* Make it full width on small screens, constrained by max-width */
-        font-size: 1rem; /* Removed !important */
-        margin-left: auto; /* for centering if parent is not text-align: center */
-        margin-right: auto;
-        display: block; /* To enable margin auto horizontal centering */
-        box-sizing: border-box;
-      }
-      footer {
-        flex-direction: column;
-        gap: 0.7rem;
-        padding: 1.5rem 0.3rem;
-        text-align: center;
-      }
-      footer > div {
-        flex-direction: column;
-        gap: 0.4rem;
-        justify-content: center;
-      }
-      footer > div:nth-child(3) {
-        gap: 1rem;
-      }
+    footer{
+      background:rgba(22,27,34,.7);backdrop-filter:blur(6px);
+      padding:2rem 1rem 2.4rem;
+      text-align:center;color:var(--muted);font-size:.9rem;
     }
-    @media (max-width: 400px) {
-      nav, main, footer { /* Changed header to main */
-        padding-left: 0.5rem; /* Increased slightly from 0.2 for better spacing */
-        padding-right: 0.5rem;
-      }
-      h1 {
-        font-size: 1.7rem; /* Adjusted from 1.3 to be slightly larger */
-      }
+    .footer-top{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+    .logo-bar{display:flex;align-items:center;gap:.6rem;}
+    .logo-bar img{width:34px;height:34px;border-radius:50%;}
+    .logo-bar .brand{font-family:"Montserrat",sans-serif;font-weight:600;color:var(--accent);}
+    .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:.95rem;}
+    .footer-links a{color:var(--accent-light);text-decoration:none;}
+    .copy{margin-top:.8rem;}
+
+    @media(max-width:640px){
+      h1{font-size:2.4rem;}
+      .lead{font-size:.8rem;}
+      .nav-links a{font-size:.95rem;}
     }
   </style>
 </head>
 <body>
+  <!-- navigation -->
   <nav>
-    <a href="/" class="nav-brand">
-      <img src="images/logo.png" alt="Virtcoin Logo" class="nav-logo-img">
-      <span class="nav-logo-text">virtcoin</span>
+    <a class="nav-brand" href="/">
+      <img src="images/logo.png" alt="Virtcoin logo">
+      <span>virtcoin</span>
     </a>
+
     <div class="nav-links">
       <a href="/">Home</a>
-      <button id="wallet-connect-btn">Connect Wallet</button>
+      <button id="wallet-connect-btn" class="btn-small">Connect Wallet</button>
     </div>
   </nav>
 
-  <main> <!-- Changed from header -->
-    <img src="images/logo.png" alt="Virtcoin Logo" class="main-logo-img">
+  <!-- hero -->
+  <header>
+    <img src="images/logo.png" alt="Virtcoin logo large">
     <h1>virtcoin</h1>
-    <div class="trust-badge">
-      Decentralized AI, Powered by You
-    </div>
-    <p class="main-description"> <!-- Added class, removed inline styles -->
-      Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on chain AI models and earn rewards by contributing compute power for model inference. Together, we’re building a permissionless, peer powered AI network that is secure, transparent, and unstoppable.
+    <div class="tagline">Decentralized AI, powered by you</div>
+
+    <p class="lead">
+      Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
     </p>
-    <!-- IMPORTANT: Replace href with your actual waitlist form link -->
-    <a href="YOUR_WAITLIST_FORM_URL_HERE" class="btn" target="_blank" rel="noopener noreferrer">Join the Waitlist</a>
+
+    <a href="YOUR_WAITLIST_FORM_URL_HERE" class="cta" target="_blank" rel="noopener noreferrer">Join the waitlist</a>
+
     <div id="crypto-prices"></div>
-  </main>
+  </header>
 
+  <!-- footer -->
   <footer>
-    <div>
-      <img src="images/logo.png" alt="Virtcoin logo" class="footer-logo-img">
-      <span class="footer-brand-text">
-        virtcoin
-      </span>
+    <div class="footer-top">
+      <div class="logo-bar">
+        <img src="images/logo.png" alt="Virtcoin logo small">
+        <span class="brand">virtcoin</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="mailto:ethan@virtcoin.com">Contact</a>
+        <a href="YOUR_TWITTER_URL_HERE" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="YOUR_DISCORD_INVITE_URL_HERE" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="/privacy.html">Privacy policy</a>
+      </div>
     </div>
-    <div>
-      © 2025 virtcoin. All rights reserved.
-    </div>
-    <div>
-      <a href="mailto:ethan@virtcoin.com">Contact</a>
-      <!-- IMPORTANT: Replace # with your actual Twitter URL -->
-      <a href="YOUR_TWITTER_URL_HERE" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 6px;">
-          <path d="M24 4.56c-.88.39-1.83.65-2.83.77a4.92 4.92 0 0 0 2.17-2.72c-.95.56-2 .96-3.13 1.18A4.92 4.92 0 0 0 16.62 3c-2.73 0-4.94 2.23-4.94 4.97 0 .39.04.77.13 1.13-4.1-.21-7.73-2.2-10.16-5.22-.44.75-.7 1.6-.7 2.53 0 1.75.87 3.28 2.19 4.18-.81-.02-1.57-.25-2.24-.61v.06c0 2.45 1.73 4.5 4.02 4.97-.43.12-.88.18-1.35.18-.33 0-.64-.03-.95-.09.65 2.01 2.52 3.48 4.74 3.52A9.88 9.88 0 0 1 0 21.52 13.88 13.88 0 0 0 7.55 24c9.05 0 14-7.55 14-14.1 0-.21 0-.42-.01-.63.96-.7 1.8-1.57 2.46-2.57z"/>
-        </svg>
-        Twitter
-      </a>
-      <!-- IMPORTANT: Replace # with your actual Discord URL -->
-      <a href="YOUR_DISCORD_INVITE_URL_HERE" aria-label="Discord" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 6px;">
-          <path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.0371c-1.6304.2733-3.2122.7874-4.8852 1.5152a.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1046c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2912a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.198.3728.2922a.077.077 0 0 1-.0066.1276c-.598.3438-1.2205.6457-1.8733.8933a.0766.0766 0 0 0-.0407.1036c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.673-3.5485-13.6601a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1835 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1842 1.0952 2.1568 2.4189 0 1.3333-.9554 2.419-2.1569 2.419Zm7.9748 0c-1.1834 0-2.1568-1.0857-2.1568-2.419 0-1.3332.9554-2.4189 2.1568-2.4189 1.2108 0 2.1842 1.0952 2.1568 2.4189 0 1.3333-.946 2.419-2.1568 2.419Z"/>
-        </svg>
-        Discord
-      </a>
-      <a href="/privacy.html" class="privacy-link">Privacy Policy</a>
-    </div>
+
+    <div class="copy">© 2025 virtcoin. All rights reserved.</div>
   </footer>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const walletConnectBtn = document.getElementById('wallet-connect-btn');
-    if (walletConnectBtn) {
-      walletConnectBtn.addEventListener('click', connectWallet);
-    }
 
-    fetchCryptoPrices();
-    setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
-  });
+  <!-- scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      const btn=document.getElementById("wallet-connect-btn");
+      if(btn)btn.addEventListener("click",connectWallet);
+      fetchPrices();
+      setInterval(fetchPrices,60000);
+    });
 
-  async function connectWallet() {
-    const btn = document.getElementById('wallet-connect-btn');
-    if (!window.ethereum) {
-      alert('MetaMask or another Web3 wallet is not installed. Please install one to continue.');
-      return;
-    }
-
-    try {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const address = accounts[0];
-      const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
-      btn.textContent = shortAddress;
-      btn.disabled = true;
-    } catch (error) {
-      console.error('Wallet connection failed:', error);
-      if (error.code === 4001) {
-        alert('Connection request rejected.');
-      } else {
-        alert('An error occurred while connecting your wallet.');
+    async function connectWallet(){
+      const btn=document.getElementById("wallet-connect-btn");
+      if(!window.ethereum){
+        alert("Please install MetaMask or another Web3 wallet.");
+        return;
+      }
+      try{
+        const accounts=await window.ethereum.request({method:"eth_requestAccounts"});
+        const addr=accounts[0];
+        btn.textContent=addr.slice(0,6)+"..."+addr.slice(-4);
+        btn.disabled=true;
+      }catch(err){
+        console.error(err);
+        alert("Wallet connection failed.");
       }
     }
-  }
 
-  async function fetchCryptoPrices() {
-    const cryptoPricesDiv = document.getElementById('crypto-prices');
-    if (!cryptoPricesDiv) return;
-
-    const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
-      const data = await response.json();
-
-      const btc = data.bitcoin?.usd;
-      const eth = data.ethereum?.usd;
-
-      const format = val => val.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-
-      if (btc && eth) {
-        cryptoPricesDiv.innerHTML = `Bitcoin: <strong>${format(btc)}</strong>   |   Ethereum: <strong>${format(eth)}</strong>`;
-      } else if (btc) {
-        cryptoPricesDiv.innerHTML = `Bitcoin: <strong>${format(btc)}</strong>   |   Ethereum: N/A`;
-      } else if (eth) {
-        cryptoPricesDiv.innerHTML = `Bitcoin: N/A   |   Ethereum: <strong>${format(eth)}</strong>`;
-      } else {
-        cryptoPricesDiv.textContent = 'Prices unavailable.';
+    async function fetchPrices(){
+      const bar=document.getElementById("crypto-prices");
+      if(!bar)return;
+      const url="https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd";
+      try{
+        const res=await fetch(url);
+        if(!res.ok)throw new Error(res.status);
+        const data=await res.json();
+        const btc=data.bitcoin?.usd;
+        const eth=data.ethereum?.usd;
+        const fmt=v=>v.toLocaleString("en-US",{style:"currency",currency:"USD"});
+        bar.innerHTML=`Bitcoin <strong>${fmt(btc)}</strong>    |    Ethereum <strong>${fmt(eth)}</strong>`;
+      }catch(e){
+        bar.textContent="Could not load prices.";
       }
-
-    } catch (error) {
-      console.error('Error fetching prices:', error);
-      cryptoPricesDiv.textContent = 'Could not load crypto prices.';
     }
-  }
-</script>
+  </script>
 </body>
 </html>
