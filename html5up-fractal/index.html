@@ -65,7 +65,6 @@
   </style>
 </head>
 <body>
-  <!-- navigation -->
   <nav>
     <a class="nav-brand" href="/">
       <img src="images/logo.png" alt="Virtcoin logo">
@@ -77,7 +76,6 @@
     </div>
   </nav>
 
-  <!-- hero -->
   <header>
     <img src="images/logo.png" alt="Virtcoin logo large">
     <h1>virtcoin</h1>
@@ -96,14 +94,12 @@
     <div id="crypto-prices"></div>
   </header>
 
-  <!-- footer -->
   <footer>
     <div class="footer-top">
       <div class="logo-bar">
         <img src="images/logo.png" alt="Virtcoin logo small">
         <span class="brand">virtcoin</span>
       </div>
-
       <div class="footer-links">
         <a href="mailto:ethan@virtcoin.com">Contact</a>
         <a href="YOUR_TWITTER_URL_HERE" target="_blank" rel="noopener noreferrer">Twitter</a>
@@ -111,7 +107,6 @@
         <a href="/privacy.html">Privacy policy</a>
       </div>
     </div>
-
     <div class="copy">© 2025 virtcoin. All rights reserved.</div>
   </footer>
 
@@ -121,7 +116,7 @@
       const btn = document.getElementById("wallet-connect-btn");
       if (btn) btn.addEventListener("click", connectWallet);
       fetchPrices();
-      setInterval(fetchPrices, 60000);
+      setInterval(fetchPrices, 300000); /* 5-minute refresh */
     });
 
     async function connectWallet() {
@@ -140,22 +135,26 @@
       }
     }
 
+    /* new single-call price routine */
     async function fetchPrices() {
       const bar = document.getElementById("crypto-prices");
       if (!bar) return;
 
       try {
-        /* Bitcoin price from Coindesk */
-        const btcRes = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
-        const btcData = await btcRes.json();
-        const btc = btcData.bpi?.USD?.rate_float;
+        const url =
+          "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD";
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(res.status);
 
-        /* Ethereum price from Binance */
-        const ethRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT");
-        const ethData = await ethRes.json();
-        const eth = parseFloat(ethData.price);
+        const data = await res.json();
+        const btc = data.BTC?.USD;
+        const eth = data.ETH?.USD;
 
-        updateBar(btc, eth);
+        if (btc && eth) {
+          updateBar(btc, eth);
+        } else {
+          throw new Error("Missing keys");
+        }
       } catch (err) {
         console.warn("Price fetch failed:", err.message);
         bar.textContent = "Could not load prices.";
