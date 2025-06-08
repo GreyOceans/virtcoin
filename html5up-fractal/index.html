@@ -179,47 +179,68 @@
   </footer>
 
   <!-- scripts -->
-  <script>
-    document.addEventListener("DOMContentLoaded",()=>{
-      const btn=document.getElementById("wallet-connect-btn");
-      if(btn)btn.addEventListener("click",connectWallet);
-      fetchPrices();
-      setInterval(fetchPrices,60000);
-    });
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("wallet-connect-btn");
+    if (btn) btn.addEventListener("click", connectWallet);
 
-    async function connectWallet(){
-      const btn=document.getElementById("wallet-connect-btn");
-      if(!window.ethereum){
-        alert("Please install MetaMask or another Web3 wallet.");
-        return;
-      }
-      try{
-        const accounts=await window.ethereum.request({method:"eth_requestAccounts"});
-        const addr=accounts[0];
-        btn.textContent=addr.slice(0,6)+"..."+addr.slice(-4);
-        btn.disabled=true;
-      }catch(err){
-        console.error(err);
-        alert("Wallet connection failed.");
-      }
+    fetchPrices();                // first call
+    setInterval(fetchPrices, 60000); // refresh every minute
+  });
+
+  async function connectWallet() {
+    const btn = document.getElementById("wallet-connect-btn");
+    if (!window.ethereum) {
+      alert("Please install MetaMask or another Web3 wallet.");
+      return;
+    }
+    try {
+      const [addr] = await window.ethereum.request({ method: "eth_requestAccounts" });
+      btn.textContent = addr.slice(0, 6) + "..." + addr.slice(-4);
+      btn.disabled = true;
+    } catch (err) {
+      console.error(err);
+      alert("Wallet connection failed.");
+    }
+  }
+
+  async function fetchPrices() {
+    const bar = document.getElementById("crypto-prices");
+    if (!bar) return;
+
+    const cgURL =
+      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd";
+
+    try {
+      const res = await fetch(cgURL, { mode: "cors" });
+      if (!res.ok) throw new Error("CoinGecko " + res.status);
+      const data = await res.json();
+      updateBar(data.bitcoin.usd, data.ethereum.usd);
+      return;                       // success, stop here
+    } catch (e) {
+      console.warn("CoinGecko failed:", e.message);
     }
 
-    async function fetchPrices(){
-      const bar=document.getElementById("crypto-prices");
-      if(!bar)return;
-      const url="https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd";
-      try{
-        const res=await fetch(url);
-        if(!res.ok)throw new Error(res.status);
-        const data=await res.json();
-        const btc=data.bitcoin?.usd;
-        const eth=data.ethereum?.usd;
-        const fmt=v=>v.toLocaleString("en-US",{style:"currency",currency:"USD"});
-        bar.innerHTML=`Bitcoin <strong>${fmt(btc)}</strong>    |    Ethereum <strong>${fmt(eth)}</strong>`;
-      }catch(e){
-        bar.textContent="Could not load prices.";
-      }
+    /* fallback to CryptoCompare */
+    try {
+      const [btcRes, ethRes] = await Promise.all([
+        fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD"),
+        fetch("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD")
+      ]);
+      if (!btcRes.ok || !ethRes.ok) throw new Error("CryptoCompare error");
+      const btc = (await btcRes.json()).USD;
+      const eth = (await ethRes.json()).USD;
+      updateBar(btc, eth);
+    } catch {
+      bar.textContent = "Could not load prices.";
     }
-  </script>
+  }
+
+  function updateBar(btc, eth) {
+    const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    document.getElementById("crypto-prices").innerHTML =
+      "Bitcoin <strong>" + fmt(btc) + "</strong>    |    Ethereum <strong>" + fmt(eth) + "</strong>";
+  }
+</script>
 </body>
 </html>
