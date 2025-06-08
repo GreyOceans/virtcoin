@@ -184,8 +184,8 @@
     const btn = document.getElementById("wallet-connect-btn");
     if (btn) btn.addEventListener("click", connectWallet);
 
-    fetchPrices();                // first call
-    setInterval(fetchPrices, 60000); // refresh every minute
+    fetchPrices();               // first run
+    setInterval(fetchPrices, 60000); // update every minute
   });
 
   async function connectWallet() {
@@ -196,7 +196,7 @@
     }
     try {
       const [addr] = await window.ethereum.request({ method: "eth_requestAccounts" });
-      btn.textContent = addr.slice(0, 6) + "..." + addr.slice(-4);
+      btn.textContent = addr.slice(0, 6) + "…" + addr.slice(-4);
       btn.disabled = true;
     } catch (err) {
       console.error(err);
@@ -208,30 +208,20 @@
     const bar = document.getElementById("crypto-prices");
     if (!bar) return;
 
-    const cgURL =
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd";
-
     try {
-      const res = await fetch(cgURL, { mode: "cors" });
-      if (!res.ok) throw new Error("CoinGecko " + res.status);
-      const data = await res.json();
-      updateBar(data.bitcoin.usd, data.ethereum.usd);
-      return;                       // success, stop here
-    } catch (e) {
-      console.warn("CoinGecko failed:", e.message);
-    }
+      /* Bitcoin price from Coindesk */
+      const btcRes = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
+      const btcData = await btcRes.json();
+      const btc = btcData.bpi?.USD?.rate_float;
 
-    /* fallback to CryptoCompare */
-    try {
-      const [btcRes, ethRes] = await Promise.all([
-        fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD"),
-        fetch("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD")
-      ]);
-      if (!btcRes.ok || !ethRes.ok) throw new Error("CryptoCompare error");
-      const btc = (await btcRes.json()).USD;
-      const eth = (await ethRes.json()).USD;
+      /* Ethereum price from Binance */
+      const ethRes = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT");
+      const ethData = await ethRes.json();
+      const eth = parseFloat(ethData.price);
+
       updateBar(btc, eth);
-    } catch {
+    } catch (err) {
+      console.warn("Price fetch failed:", err.message);
       bar.textContent = "Could not load prices.";
     }
   }
@@ -239,7 +229,7 @@
   function updateBar(btc, eth) {
     const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
     document.getElementById("crypto-prices").innerHTML =
-      "Bitcoin <strong>" + fmt(btc) + "</strong>    |    Ethereum <strong>" + fmt(eth) + "</strong>";
+      "Bitcoin <strong>" + fmt(btc) + "</strong>   |   Ethereum <strong>" + fmt(eth) + "</strong>";
   }
 </script>
 </body>
