@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- ------------ metadata ------------ -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Virtcoin is a blockchain protocol for decentralized artificial intelligence.">
     <title>Virtcoin | Coming Soon</title>
 
-    <!-- ------------ icons & theming ------------ -->
     <link rel="icon" type="image/png" href="images/logo1.png">
     <meta name="theme-color" content="#0d1117">
 
-    <!-- ------------ fonts ------------ -->
+    <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <style>
-      /* ---------- root palette ---------- */
       :root {
         --bg1: #0d1117;
         --bg2: #00091a;
@@ -27,15 +24,7 @@
         --muted: #8b98a5;
         --radius: 0.8rem;
       }
-
-      /* ---------- reset ---------- */
-      *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      /* ---------- body / backdrop ---------- */
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         font-family: "Roboto", sans-serif;
         color: var(--text);
@@ -56,11 +45,11 @@
         z-index: -1;
       }
       @keyframes float {
-        from { transform: translateY(0);   }
+        from { transform: translateY(0); }
         to   { transform: translateY(-200px); }
       }
 
-      /* ---------- navigation ---------- */
+      /* nav */
       nav {
         width: 100%;
         padding: 0.7rem 2rem;
@@ -74,34 +63,11 @@
         align-items: center;
         z-index: 10;
       }
-      .nav-brand {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: inherit;
-      }
-      .nav-brand img {
-        width: 42px;
-        height: 42px;
-        margin-right: 0.65rem;
-      }
-      .nav-brand span {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: var(--accent);
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-      .nav-links a {
-        color: var(--accent-light);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1.05rem;
-      }
+      .nav-brand { display: flex; align-items: center; text-decoration: none; color: inherit; }
+      .nav-brand img { width: 42px; height: 42px; margin-right: 0.65rem; }
+      .nav-brand span { font-family: "Montserrat", sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+      .nav-links { display: flex; align-items: center; gap: 2rem; }
+      .nav-links a { color: var(--accent-light); text-decoration: none; font-weight: 500; font-size: 1.05rem; }
       .btn-small {
         padding: 0.45rem 1.3rem;
         font-family: "Montserrat", sans-serif;
@@ -116,7 +82,7 @@
       }
       .btn-small:hover { background: var(--accent-light); }
 
-      /* ---------- hero ---------- */
+      /* hero */
       main {
         flex: 1;
         display: flex;
@@ -126,11 +92,7 @@
         text-align: center;
         padding: 3.5rem 1rem 2.5rem;
       }
-      main img {
-        width: 110px;
-        height: auto;
-        margin-bottom: 1.2rem;
-      }
+      main img { width: 110px; height: auto; margin-bottom: 1.2rem; }
       h1 {
         font-family: "Montserrat", sans-serif;
         font-size: 3.4rem;
@@ -140,14 +102,27 @@
         -webkit-text-fill-color: transparent;
         text-shadow: 0 0 8px rgba(88, 166, 255, .25);
       }
+
+      /* updated tagline pill */
       .tagline {
+        display: inline-block;
         margin-top: 0.6rem;
-        padding: 4px 14px;
-        font-size: 0.95rem;
-        color: var(--accent);
-        background: rgba(88, 166, 255, .14);
+        padding: 0.55rem 1.6rem;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(180deg, #ff9a00 0%, #ff7b00 100%);
+        border: none;
         border-radius: 9999px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+        transition: filter 0.25s, transform 0.25s;
       }
+      .tagline:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+      }
+
       .lead {
         max-width: 620px;
         margin-top: 1.4rem;
@@ -157,7 +132,7 @@
         color: #b4c1d3;
       }
 
-      /* call-to-action */
+      /* cta */
       .cta {
         margin-top: 2rem;
         padding: 0.85rem 2.4rem;
@@ -172,10 +147,7 @@
         box-shadow: 0 4px 16px rgba(88, 166, 255, .20);
         transition: background .25s, transform .25s;
       }
-      .cta:hover {
-        background: var(--accent-light);
-        transform: translateY(-2px);
-      }
+      .cta:hover { background: var(--accent-light); transform: translateY(-2px); }
 
       /* price bar */
       #crypto-prices {
@@ -188,7 +160,7 @@
       }
       #crypto-prices strong { color: var(--accent-light); }
 
-      /* ---------- footer ---------- */
+      /* footer */
       footer {
         background: rgba(22, 27, 34, .70);
         backdrop-filter: blur(6px);
@@ -197,42 +169,14 @@
         color: var(--muted);
         font-size: 0.9rem;
       }
-      .footer-top {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1.2rem;
-      }
-      .logo-bar {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-      }
-      .logo-bar img {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-      }
-      .logo-bar .brand {
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
-        color: var(--accent);
-      }
-      .footer-links {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        font-size: 0.95rem;
-      }
-      .footer-links a {
-        color: var(--accent-light);
-        text-decoration: none;
-      }
+      .footer-top { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+      .logo-bar { display: flex; align-items: center; gap: 0.6rem; }
+      .logo-bar img { width: 34px; height: 34px; border-radius: 50%; }
+      .logo-bar .brand { font-family: "Montserrat", sans-serif; font-weight: 600; color: var(--accent); }
+      .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; font-size: 0.95rem; }
+      .footer-links a { color: var(--accent-light); text-decoration: none; }
       .copy { margin-top: 0.8rem; }
 
-      /* small screens */
       @media (max-width: 640px) {
         h1   { font-size: 2.4rem; }
         .lead{ font-size: 0.80rem; }
@@ -242,7 +186,6 @@
   </head>
 
   <body>
-    <!-- site navigation -->
     <header>
       <nav aria-label="primary navigation">
         <a class="nav-brand" href="/">
@@ -257,7 +200,6 @@
       </nav>
     </header>
 
-    <!-- hero section -->
     <main id="hero">
       <img src="images/logo1.png" alt="Virtcoin logo large">
 
@@ -265,7 +207,7 @@
       <p class="tagline">Decentralized AI powered by you</p>
 
       <p class="lead">
-        Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on-chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
+        Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
       </p>
 
       <a href="mailto:ethan@virtcoin.com?subject=Investor%20Inquiry" class="cta" aria-label="Become an early investor email link" rel="noopener noreferrer">
@@ -275,7 +217,6 @@
       <div id="crypto-prices" aria-live="polite"></div>
     </main>
 
-    <!-- site footer -->
     <footer>
       <div class="footer-top">
         <div class="logo-bar">
@@ -296,17 +237,15 @@
       </p>
     </footer>
 
-    <!-- ------------ scripts ------------ -->
     <script defer>
       document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById("wallet-connect-btn");
         btn?.addEventListener("click", connectWallet);
 
         fetchPrices();
-        setInterval(fetchPrices, 300000); // five minutes
+        setInterval(fetchPrices, 300000);
       });
 
-      /* connect wallet */
       async function connectWallet() {
         const btn = document.getElementById("wallet-connect-btn");
         if (!window.ethereum) {
@@ -323,7 +262,6 @@
         }
       }
 
-      /* fetch BTC and ETH prices */
       async function fetchPrices() {
         const bar = document.getElementById("crypto-prices");
         if (!bar) return;
@@ -346,7 +284,6 @@
         }
       }
 
-      /* update price bar */
       function updateBar(btc, eth) {
         const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
         document.getElementById("crypto-prices").innerHTML =
