@@ -1,36 +1,41 @@
-<!-- SECTION 1 : HEAD -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ------------ metadata ------------ -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Virtcoin is a blockchain protocol for decentralized artificial intelligence.">
     <title>Virtcoin | Coming Soon</title>
 
+    <!-- ------------ icons & theming ------------ -->
     <link rel="icon" type="image/png" href="images/logo.png">
     <meta name="theme-color" content="#0d1117">
 
+    <!-- ------------ fonts ------------ -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap"
-          as="style"
-          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <style>
+      /* ---------- root palette ---------- */
       :root {
         --bg1: #0d1117;
         --bg2: #00091a;
         --accent: #58a6ff;
         --accent-light: #79c0ff;
-        --orange: #fe8307;      /* new orange for tagline */
         --text: #c9d1d9;
         --muted: #8b98a5;
         --radius: 0.8rem;
       }
 
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      /* ---------- reset ---------- */
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
+      /* ---------- body / backdrop ---------- */
       body {
         font-family: "Roboto", sans-serif;
         color: var(--text);
@@ -45,31 +50,58 @@
         position: fixed;
         inset: 0;
         background:
-          radial-gradient(circle at 20% 30%, rgba(88,166,255,.15), transparent 50%),
-          radial-gradient(circle at 80% 70%, rgba(121,192,255,.10), transparent 55%);
+          radial-gradient(circle at 20% 30%, rgba(88, 166, 255, .15), transparent 50%),
+          radial-gradient(circle at 80% 70%, rgba(121, 192, 255, .10), transparent 55%);
         animation: float 20s linear infinite;
         z-index: -1;
       }
-      @keyframes float { from { transform: translateY(0);} to { transform: translateY(-200px);} }
+      @keyframes float {
+        from { transform: translateY(0);   }
+        to   { transform: translateY(-200px); }
+      }
 
+      /* ---------- navigation ---------- */
       nav {
         width: 100%;
         padding: 0.7rem 2rem;
         position: sticky;
         top: 0;
         backdrop-filter: blur(8px);
-        background: rgba(13,17,23,.55);
-        border-bottom: 1px solid rgba(255,255,255,.05);
+        background: rgba(13, 17, 23, .55);
+        border-bottom: 1px solid rgba(255, 255, 255, .05);
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 10;
       }
-      .nav-brand { display: flex; align-items: center; text-decoration: none; color: inherit; }
-      .nav-brand img { width: 42px; height: 42px; margin-right: 0.65rem; }
-      .nav-brand span { font-family: "Montserrat", sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--accent); }
-      .nav-links { display: flex; align-items: center; gap: 2rem; }
-      .nav-links a { color: var(--accent-light); text-decoration: none; font-weight: 500; font-size: 1.05rem; }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+      }
+      .nav-brand img {
+        width: 42px;
+        height: 42px;
+        margin-right: 0.65rem;
+      }
+      .nav-brand span {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .nav-links a {
+        color: var(--accent-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.05rem;
+      }
       .btn-small {
         padding: 0.45rem 1.3rem;
         font-family: "Montserrat", sans-serif;
@@ -79,11 +111,12 @@
         border: none;
         border-radius: var(--radius);
         cursor: pointer;
-        box-shadow: 0 2px 8px rgba(88,166,255,.12);
+        box-shadow: 0 2px 8px rgba(88, 166, 255, .12);
         transition: background .25s;
       }
       .btn-small:hover { background: var(--accent-light); }
 
+      /* ---------- hero ---------- */
       main {
         flex: 1;
         display: flex;
@@ -93,7 +126,11 @@
         text-align: center;
         padding: 3.5rem 1rem 2.5rem;
       }
-      main img { width: 110px; height: auto; margin-bottom: 1.2rem; }
+      main img {
+        width: 110px;
+        height: auto;
+        margin-bottom: 1.2rem;
+      }
       h1 {
         font-family: "Montserrat", sans-serif;
         font-size: 3.4rem;
@@ -101,14 +138,14 @@
         background: linear-gradient(90deg, var(--accent), var(--accent-light));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 8px rgba(88,166,255,.25);
+        text-shadow: 0 0 8px rgba(88, 166, 255, .25);
       }
       .tagline {
         margin-top: 0.6rem;
         padding: 4px 14px;
         font-size: 0.95rem;
-        color: var(--orange);                       /* orange text */
-        background: rgba(254,131,7,.14);            /* soft orange pill */
+        color: var(--accent);
+        background: rgba(88, 166, 255, .14);
         border-radius: 9999px;
       }
       .lead {
@@ -120,6 +157,7 @@
         color: #b4c1d3;
       }
 
+      /* call-to-action */
       .cta {
         margin-top: 2rem;
         padding: 0.85rem 2.4rem;
@@ -131,52 +169,87 @@
         border: none;
         border-radius: var(--radius);
         cursor: pointer;
-        box-shadow: 0 4px 16px rgba(88,166,255,.20);
+        box-shadow: 0 4px 16px rgba(88, 166, 255, .20);
         transition: background .25s, transform .25s;
       }
-      .cta:hover { background: var(--accent-light); transform: translateY(-2px); }
+      .cta:hover {
+        background: var(--accent-light);
+        transform: translateY(-2px);
+      }
 
+      /* price bar */
       #crypto-prices {
         margin-top: 2rem;
         font-size: 1.05rem;
-        background: rgba(255,255,255,.05);
+        background: rgba(255, 255, 255, .05);
         padding: 0.6rem 1.4rem;
         border-radius: var(--radius);
         display: inline-block;
       }
       #crypto-prices strong { color: var(--accent-light); }
 
+      /* ---------- footer ---------- */
       footer {
-        background: rgba(22,27,34,.70);
+        background: rgba(22, 27, 34, .70);
         backdrop-filter: blur(6px);
         padding: 2rem 1rem 2.4rem;
         text-align: center;
         color: var(--muted);
         font-size: 0.9rem;
       }
-      .footer-top { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
-      .logo-bar { display: flex; align-items: center; gap: 0.6rem; }
-      .logo-bar img { width: 34px; height: 34px; border-radius: 50%; }
-      .logo-bar .brand { font-family: "Montserrat", sans-serif; font-weight: 600; color: var(--accent); }
-      .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; font-size: 0.95rem; }
-      .footer-links a { color: var(--accent-light); text-decoration: none; }
+      .footer-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+      }
+      .logo-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .logo-bar img {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+      }
+      .logo-bar .brand {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 0.95rem;
+      }
+      .footer-links a {
+        color: var(--accent-light);
+        text-decoration: none;
+      }
       .copy { margin-top: 0.8rem; }
 
+      /* small screens */
       @media (max-width: 640px) {
-        h1 { font-size: 2.4rem; }
-        .lead { font-size: 0.80rem; }
+        h1   { font-size: 2.4rem; }
+        .lead{ font-size: 0.80rem; }
         .nav-links a { font-size: 0.95rem; }
       }
     </style>
   </head>
-  <!-- SECTION 2 : BODY -->
+
   <body>
+    <!-- site navigation -->
     <header>
       <nav aria-label="primary navigation">
         <a class="nav-brand" href="/">
           <img src="images/logo.png" alt="Virtcoin logo">
           <span>Virtcoin</span>
         </a>
+
         <div class="nav-links">
           <a href="/">Home</a>
           <button id="wallet-connect-btn" class="btn-small" aria-label="Connect crypto wallet">Connect Wallet</button>
@@ -184,31 +257,32 @@
       </nav>
     </header>
 
+    <!-- hero section -->
     <main id="hero">
       <img src="images/logo.png" alt="Virtcoin logo large">
+
       <h1>Virtcoin</h1>
-      <p class="tagline">Decentralized AI, powered by you</p>
+      <p class="tagline">Decentralized AI powered by you</p>
 
       <p class="lead">
-        Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on-chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer-powered AI network that is secure, transparent and unstoppable.
+        Virtcoin is a blockchain protocol for decentralized artificial intelligence. Users can stake tokens to support on-chain AI models and earn rewards by contributing compute power for model inference. Together we are building a permissionless peer powered AI network that is secure transparent and unstoppable.
       </p>
 
-      <a href="mailto:ethan@virtcoin.com?subject=Investor%20Inquiry"
-         class="cta"
-         aria-label="Become an early investor email link"
-         rel="noopener noreferrer">
+      <a href="mailto:ethan@virtcoin.com?subject=Investor%20Inquiry" class="cta" aria-label="Become an early investor email link" rel="noopener noreferrer">
         Become an Early Investor
       </a>
 
       <div id="crypto-prices" aria-live="polite"></div>
     </main>
 
+    <!-- site footer -->
     <footer>
       <div class="footer-top">
         <div class="logo-bar">
           <img src="images/logo.png" alt="Virtcoin logo small">
           <span class="brand">Virtcoin</span>
         </div>
+
         <nav class="footer-links" aria-label="footer navigation">
           <a href="mailto:ethan@virtcoin.com">Contact</a>
           <a href="YOUR_TWITTER_URL_HERE" target="_blank" rel="noopener noreferrer">Twitter</a>
@@ -216,17 +290,23 @@
           <a href="/privacy.html">Privacy policy</a>
         </nav>
       </div>
-      <p class="copy">© 2025 Virtcoin. All rights reserved.</p>
+
+      <p class="copy">
+        © 2025 Virtcoin. All rights reserved.
+      </p>
     </footer>
 
+    <!-- ------------ scripts ------------ -->
     <script defer>
       document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById("wallet-connect-btn");
-        if (btn) btn.addEventListener("click", connectWallet);
+        btn?.addEventListener("click", connectWallet);
+
         fetchPrices();
-        setInterval(fetchPrices, 300000);
+        setInterval(fetchPrices, 300000); // five minutes
       });
 
+      /* connect wallet */
       async function connectWallet() {
         const btn = document.getElementById("wallet-connect-btn");
         if (!window.ethereum) {
@@ -235,7 +315,7 @@
         }
         try {
           const [addr] = await window.ethereum.request({ method: "eth_requestAccounts" });
-          btn.textContent = addr.slice(0, 6) + "…" + addr.slice(-4);
+          btn.textContent = `${addr.slice(0, 6)}…${addr.slice(-4)}`;
           btn.disabled = true;
         } catch (err) {
           console.error(err);
@@ -243,26 +323,34 @@
         }
       }
 
+      /* fetch BTC and ETH prices */
       async function fetchPrices() {
         const bar = document.getElementById("crypto-prices");
         if (!bar) return;
+
         try {
           const url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD";
           const res = await fetch(url);
           if (!res.ok) throw new Error(res.status);
+
           const data = await res.json();
-          updateBar(data.BTC?.USD, data.ETH?.USD);
+          const btc = data.BTC?.USD;
+          const eth = data.ETH?.USD;
+
+          if (!btc || !eth) throw new Error("Missing keys");
+
+          updateBar(btc, eth);
         } catch (err) {
           console.warn("Price fetch failed:", err.message);
           bar.textContent = "Could not load prices.";
         }
       }
 
+      /* update price bar */
       function updateBar(btc, eth) {
-        if (!btc || !eth) return;
         const fmt = v => v.toLocaleString("en-US", { style: "currency", currency: "USD" });
         document.getElementById("crypto-prices").innerHTML =
-          "Bitcoin <strong>" + fmt(btc) + "</strong> | Ethereum <strong>" + fmt(eth) + "</strong>";
+          `Bitcoin <strong>${fmt(btc)}</strong> | Ethereum <strong>${fmt(eth)}</strong>`;
       }
     </script>
   </body>
