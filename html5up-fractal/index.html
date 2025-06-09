@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="images/logo1.png">
     <meta name="theme-color" content="#0d1117">
 
-    <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Inter:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
@@ -24,7 +23,9 @@
         --muted: #8b98a5;
         --radius: 0.8rem;
       }
+
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
       body {
         font-family: "Roboto", sans-serif;
         color: var(--text);
@@ -49,7 +50,6 @@
         to   { transform: translateY(-200px); }
       }
 
-      /* nav */
       nav {
         width: 100%;
         padding: 0.7rem 2rem;
@@ -82,7 +82,6 @@
       }
       .btn-small:hover { background: var(--accent-light); }
 
-      /* hero */
       main {
         flex: 1;
         display: flex;
@@ -103,13 +102,13 @@
         text-shadow: 0 0 8px rgba(88, 166, 255, .25);
       }
 
-      /* updated tagline pill */
+      /* 30 percent smaller pill */
       .tagline {
         display: inline-block;
         margin-top: 0.6rem;
-        padding: 0.55rem 1.6rem;
+        padding: 0.4rem 1.1rem;
         font-family: "Montserrat", sans-serif;
-        font-size: 1rem;
+        font-size: 0.7rem;
         font-weight: 600;
         color: #fff;
         background: linear-gradient(180deg, #ff9a00 0%, #ff7b00 100%);
@@ -132,7 +131,6 @@
         color: #b4c1d3;
       }
 
-      /* cta */
       .cta {
         margin-top: 2rem;
         padding: 0.85rem 2.4rem;
@@ -149,7 +147,6 @@
       }
       .cta:hover { background: var(--accent-light); transform: translateY(-2px); }
 
-      /* price bar */
       #crypto-prices {
         margin-top: 2rem;
         font-size: 1.05rem;
@@ -160,7 +157,6 @@
       }
       #crypto-prices strong { color: var(--accent-light); }
 
-      /* footer */
       footer {
         background: rgba(22, 27, 34, .70);
         backdrop-filter: blur(6px);
